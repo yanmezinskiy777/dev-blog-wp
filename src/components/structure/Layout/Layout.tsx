@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Helmet from "react-helmet";
-import { helmetSettingsFromMetadata } from "../../../utils/metadata";
+import { helmetSettingsFromMetadata } from "../../../utils/metadata/metadata";
+import useApp from "../../hooks/useApp";
 import styles from "./Layout.module.css";
 
 interface ILayout {
@@ -8,17 +9,9 @@ interface ILayout {
 }
 
 const Layout: FC<ILayout> = ({ children }) => {
-  const metadata = {
-    description: "Dev blog",
-    language: "ru",
-    title: "Dev",
-    canonical: "test",
-    og: {},
-    twitter: {},
-    article: {},
-    siteTitle: "Dev Blog",
-  };
 
+  const { metadata }: any = useApp();
+  
   const helmetSettings = {
     defaultTitle: metadata.title,
     titleTemplate:

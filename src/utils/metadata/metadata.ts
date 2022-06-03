@@ -1,4 +1,4 @@
-import { removeExtraSpaces } from "./baseUtils";
+import { removeExtraSpaces } from "../baseUtils";
 import { IMetadata, IOptions, ISettings } from "./types";
 
 export function helmetSettingsFromMetadata(
