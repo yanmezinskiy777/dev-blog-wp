@@ -1,13 +1,14 @@
+import { ISettingsMetadata } from "../../components/api/metadata/types";
 import { removeExtraSpaces } from "../baseUtils";
-import { IMetadata, IOptions, ISettings } from "./types";
+import { IOptions, ISettings } from "./types";
 
 export function helmetSettingsFromMetadata(
-  metadata: IMetadata,
+  metadata: ISettingsMetadata,
   options: IOptions
 ) {
   const { link = [], meta = [], setTitle = true } = options;
 
-  const sanitizedDescription = removeExtraSpaces(metadata.description);
+  const sanitizedDescription = removeExtraSpaces (metadata.description);
 
   const settings: ISettings = {
     htmlAttributes: {

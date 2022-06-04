@@ -26,7 +26,7 @@ export async function getSiteMetadata() {
       siteTitle: title,
       description,
       social: undefined,
-      webmaster: {},
+      webmaster: undefined,
       twitter: {
         username: undefined,
         cardType: undefined

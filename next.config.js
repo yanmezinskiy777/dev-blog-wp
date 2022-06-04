@@ -8,6 +8,7 @@ module.exports = {
     WORDPRESS_GRAPHQL_ENDPOINT: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
     WORDPRESS_MENU_LOCATION_NAVIGATION: process.env.WORDPRESS_MENU_LOCATION_NAVIGATION || 'PRIMARY',
     WORDPRESS_PLUGIN_SEO: parseEnvValue(process.env.WORDPRESS_PLUGIN_SEO, false),
+    POSTS_PER_PAGE: process.env.POSTS_PER_PAGE,
 
     // The image directory for open graph images will be saved at the location above
     // with `public` prepended. By default, images will be saved at /public/images/og

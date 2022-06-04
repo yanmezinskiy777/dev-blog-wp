@@ -1,9 +1,23 @@
 import { createContext, useContext } from "react";
 import { SiteProps } from "../../pages/_app";
 
-export const AppContext = createContext({});
+const initalState = {
+  metadata: {
+    title: "Dev Blog",
+    siteTitle: "Dev Blog",
+    description: "Dev Blog",
+    social: undefined,
+    webmaster: {},
+    twitter: {
+      username: undefined,
+      cardType: undefined,
+    },
+  },
+};
 
-export function useAppContext(data: SiteProps) {
+export const AppContext = createContext<SiteProps>(initalState);
+
+export function useAppContext(data: SiteProps): SiteProps {
   return data;
 }
 
