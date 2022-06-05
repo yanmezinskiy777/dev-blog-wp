@@ -2,7 +2,7 @@
     width: 100%;
     height: 90px;
     display: flex;
-    border-bottom: 1px sold white;
+    border-bottom: 1px solid white;
     align-items: center;
 }
 .logo{

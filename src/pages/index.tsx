@@ -17,11 +17,13 @@ const Home: NextPage<IHome> = ({ posts, pagination }) => {
     <Layout>
       <div className={styles.container}>
         <div className={styles.posts}>
-          <ul>
-            {posts?.map((post: IPost) => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </ul>
+          {posts?.map((post: IPost) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+        </div>
+        <div className={styles.toolbar}>
+          <div>Good Posts</div>
+          <div>Categories</div>
         </div>
       </div>
     </Layout>

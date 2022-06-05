@@ -9,6 +9,12 @@ export interface IPost {
   postId: number;
   slug: string;
   title: string;
+  featuredImage: IFeaturedImages;
+}
+
+interface IFeaturedImages{
+  sourceUrl: string;
+  srcSet: string;
 }
 
 interface IAuthor {

@@ -19,6 +19,12 @@ export const POST_FIELDS = gql`
     postId
     slug
     title
+    featuredImage {
+      node {
+        sourceUrl
+        srcSet
+      }
+    }
   }
 `;
 

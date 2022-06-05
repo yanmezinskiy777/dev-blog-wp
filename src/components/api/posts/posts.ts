@@ -42,6 +42,12 @@ function normalizationPost(data: any) {
 
   // Clean up the categories to make them more easy to access
 
+  if (post?.featuredImage) {
+    post.featuredImage = {
+      ...post.featuredImage.node,
+    };
+  }
+
   if (post.categories) {
     post.categories = post.categories.edges.map(({ node }: any) => {
       return {
@@ -79,7 +85,7 @@ export async function getPaginatedPosts({
   currentPage = 1,
   options,
 }: IPaginatePosts) {
-  const { posts }: { posts: IPost[]} = await getAllPosts(options);
+  const { posts }: { posts: IPost[] } = await getAllPosts(options);
   const postsPerPage = await getPostsPerPage();
   const pagesCount = await getPagesCount(posts, postsPerPage);
 
