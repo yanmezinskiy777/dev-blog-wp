@@ -1,0 +1,18 @@
+.button {
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    font-weight: 500;
+    font-size: 1rem;
+    background-color: rgba(219, 39, 119, 1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
+    width: max-content;
+  }
+  .button:hover {
+    transform: translateY(-4px);
+  }
+  

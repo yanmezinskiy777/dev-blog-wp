@@ -1,11 +1,13 @@
 import React, { FC } from "react";
 import { IPost } from "./types";
 import styles from "./PostCard.module.css";
-import Link from "next/link";
+import Button from "../ui/button";
 
 const PostCard: FC<{ post: IPost }> = ({ post }) => {
-  console.log(post);
   const { featuredImage, title, excerpt, slug } = post;
+  const getPostLink = (slug: string) => {
+    return `/posts/${slug}`;
+  };
   return (
     <article className={styles.post}>
       {featuredImage?.sourceUrl && (
@@ -19,6 +21,7 @@ const PostCard: FC<{ post: IPost }> = ({ post }) => {
       )}
       {title && (
         <h1
+          className={styles.title}
           dangerouslySetInnerHTML={{
             __html: title,
           }}
@@ -26,14 +29,15 @@ const PostCard: FC<{ post: IPost }> = ({ post }) => {
       )}
       {excerpt && (
         <div
+          className={styles.excerpt}
           dangerouslySetInnerHTML={{
             __html: excerpt,
           }}
         />
       )}
-      <Link href={slug}>
-         
-      </Link>
+      <Button type="link" href={getPostLink(slug)} classNames={styles.button}>
+        <>Продолжить чтение</>
+      </Button>
     </article>
   );
 };
