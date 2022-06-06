@@ -122,6 +122,11 @@
   "resolved" "https://registry.npmjs.org/@types/node/-/node-17.0.38.tgz"
   "version" "17.0.38"
 
+"@types/parameterize@^1.0.1":
+  "integrity" "sha512-A+BhYIERE2rAGiXEaZcSliKO/YPSm8VHN9WeHjVXpmyuHNQ9sgYkD7v70D89pFJbiOCjGeSMBNVk1VxhomrFAg=="
+  "resolved" "https://registry.npmjs.org/@types/parameterize/-/parameterize-1.0.1.tgz"
+  "version" "1.0.1"
+
 "@types/prop-types@*":
   "integrity" "sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w=="
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
@@ -402,6 +407,11 @@
   "integrity" "sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA=="
   "resolved" "https://registry.npmjs.org/damerau-levenshtein/-/damerau-levenshtein-1.0.8.tgz"
   "version" "1.0.8"
+
+"date-fns@^2.28.0":
+  "integrity" "sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw=="
+  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.28.0.tgz"
+  "version" "2.28.0"
 
 "debug@^2.6.9":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
@@ -1347,6 +1357,11 @@
 "p-try@^1.0.0":
   "integrity" "sha512-U1etNYuMJoIz3ZXSrrySFjsXQTWOx2/jdi86L+2pRvph/qMKL6sbcCYdH23fqsbm8TH2Gn0OybpT4eSFlCVHww=="
   "resolved" "https://registry.npmjs.org/p-try/-/p-try-1.0.0.tgz"
+  "version" "1.0.0"
+
+"parameterize@^1.0.0":
+  "integrity" "sha512-7i+fCXWfdt7fEs9xMeQHC5e7G1OXX8J5JtfuzhgnqAZU1i6e2qX3aigQ2OH5uongdqmKz/xgMqfY7jtTZDTBYw=="
+  "resolved" "https://registry.npmjs.org/parameterize/-/parameterize-1.0.0.tgz"
   "version" "1.0.0"
 
 "parent-module@^1.0.0":

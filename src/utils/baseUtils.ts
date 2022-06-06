@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export function removeExtraSpaces(text?: string) {
   if (typeof text !== "string") return;
   return text.replace(/\s+/g, " ").trim();
@@ -24,4 +26,8 @@ export function decodeHtmlEntities(text?: string) {
   };
 
   return decoded.replace(/&amp;|&quot;|&#039;/g, (char) => entities[char]);
+}
+
+export function formatDate(date: string, pattern = "PPP") {
+  return format(new Date(date), pattern);
 }

@@ -2,12 +2,13 @@ import React, { FC } from "react";
 import { IPost } from "./types";
 import styles from "./PostCard.module.css";
 import Button from "../ui/button";
+import Metadata from "../metadata";
+import { getPostLink } from "../../utils/posts";
 
 const PostCard: FC<{ post: IPost }> = ({ post }) => {
-  const { featuredImage, title, excerpt, slug } = post;
-  const getPostLink = (slug: string) => {
-    return `/posts/${slug}`;
-  };
+  const { featuredImage, title, excerpt, slug, author, date, categories } =
+    post;
+
   return (
     <article className={styles.post}>
       {featuredImage?.sourceUrl && (
@@ -27,6 +28,7 @@ const PostCard: FC<{ post: IPost }> = ({ post }) => {
           }}
         />
       )}
+      <Metadata author={author} date={date} categories={categories} />
       {excerpt && (
         <div
           className={styles.excerpt}

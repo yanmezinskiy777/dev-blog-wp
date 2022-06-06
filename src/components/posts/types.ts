@@ -17,7 +17,7 @@ interface IFeaturedImages{
   srcSet: string;
 }
 
-interface IAuthor {
+export interface IAuthor {
   id: string;
   name: string;
   slug: string;
@@ -30,7 +30,7 @@ interface IAvatar {
   width: number;
 }
 
-interface ICategories {
+export interface ICategories {
   databaseId: number;
   id: string;
   name: string;
