@@ -4,7 +4,9 @@ import {
   QUERY_ALL_POSTS,
   QUERY_ALL_POSTS_ARCHIVE,
   QUERY_ALL_POSTS_INDEX,
+  QUERY_POST_BY_SLUG,
   QUERY_POST_PER_PAGE,
+  QUERY_POST_SEO_BY_SLUG,
 } from "./query";
 import { IOptionsGetAllPosts, IPaginatePosts } from "./types";
 
@@ -64,7 +66,7 @@ const allPostsIncludesTypes = {
   index: QUERY_ALL_POSTS_INDEX,
 };
 
-async function getAllPosts(options: IOptionsGetAllPosts) {
+export async function getAllPosts(options: IOptionsGetAllPosts) {
   const { queryIncludes } = options;
   const apolloClient = getApolloClient();
 
@@ -135,4 +137,93 @@ export async function getPagesCount(posts: any, postsPerPage: any) {
 
 export function sortStickyPosts(posts: any) {
   return [...posts].sort((post) => (post.isSticky ? -1 : 1));
+}
+
+
+export async function getPostBySlug(slug?: string | string[]) {
+  const apolloClient = getApolloClient();
+  const apiHost = new URL(process.env.WORDPRESS_GRAPHQL_ENDPOINT as any).host;
+
+  let postData;
+  let seoData;
+
+  try {
+    postData = await apolloClient.query({
+      query: QUERY_POST_BY_SLUG,
+      variables: {
+        slug,
+      },
+    });
+  } catch (e: any) {
+    console.log(`[posts][getPostBySlug] Failed to query post data: ${e.message}`);
+    throw e;
+  }
+
+  const post = [postData?.data.post].map(post => normalizationPost(post))[0];
+
+  // If the SEO plugin is enabled, look up the data
+  // and apply it to the default settings
+
+  if ((Boolean(process.env.WORDPRESS_PLUGIN_SEO)) === true) {
+    try {
+      seoData = await apolloClient.query({
+        query: QUERY_POST_SEO_BY_SLUG,
+        variables: {
+          slug,
+        },
+      });
+    } catch (e: any) {
+      console.log(`[posts][getPostBySlug] Failed to query SEO plugin: ${e.message}`);
+      console.log('Is the SEO Plugin installed? If not, disable WORDPRESS_PLUGIN_SEO in next.config.js.');
+      throw e;
+    }
+
+    const { seo = {} } = seoData?.data?.post || {};
+
+    post.metaTitle = seo.title;
+    post.metaDescription = seo.metaDesc;
+    post.readingTime = seo.readingTime;
+
+    // The SEO plugin by default includes a canonical link, but we don't want to use that
+    // because it includes the WordPress host, not the site host. We manage the canonical
+    // link along with the other metadata, but explicitly check if there's a custom one
+    // in here by looking for the API's host in the provided canonical link
+
+    if (seo.canonical && !seo.canonical.includes(apiHost)) {
+      post.canonical = seo.canonical;
+    }
+
+    post.og = {
+      author: seo.opengraphAuthor,
+      description: seo.opengraphDescription,
+      image: seo.opengraphImage,
+      modifiedTime: seo.opengraphModifiedTime,
+      publishedTime: seo.opengraphPublishedTime,
+      publisher: seo.opengraphPublisher,
+      title: seo.opengraphTitle,
+      type: seo.opengraphType,
+    };
+
+    post.article = {
+      author: post.og.author,
+      modifiedTime: post.og.modifiedTime,
+      publishedTime: post.og.publishedTime,
+      publisher: post.og.publisher,
+    };
+
+    post.robots = {
+      nofollow: seo.metaRobotsNofollow,
+      noindex: seo.metaRobotsNoindex,
+    };
+
+    post.twitter = {
+      description: seo.twitterDescription,
+      image: seo.twitterImage,
+      title: seo.twitterTitle,
+    };
+  }
+
+  return {
+    post,
+  };
 }

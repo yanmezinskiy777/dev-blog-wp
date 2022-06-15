@@ -16,7 +16,7 @@ const Layout: FC<ILayout> = ({ children }) => {
   const helmetSettings = {
     defaultTitle: metadata.title,
     titleTemplate:
-      (process.env.WORDPRESS_PLUGIN_SEO as any) === true
+      Boolean(process.env.WORDPRESS_PLUGIN_SEO) === true
         ? "%s"
         : `%s - ${metadata.title}`,
     ...helmetSettingsFromMetadata(metadata, {

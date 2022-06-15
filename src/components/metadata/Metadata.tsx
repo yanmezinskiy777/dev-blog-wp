@@ -28,9 +28,9 @@ const Metadata: FC<IMetadata> = ({
 }) => {
   const { compactCategories } = options;
   return (
-    <ul>
+    <ul className={styles.metadata}>
       {author && (
-        <li>
+        <li className={styles.avatar}>
           <address>
             {author.avatar && (
               <img
@@ -38,21 +38,22 @@ const Metadata: FC<IMetadata> = ({
                 height={author.avatar.height}
                 src={author.avatar.url}
                 alt="Author Avatar"
+                className={styles.ava}
               />
             )}
             <Link href={authorPathByName(author.name)}>
-              <a rel="author">{author.name}</a>
+              <a rel="author" className={styles.username}>{author.name}</a>
             </Link>
           </address>
         </li>
       )}
       {date && (
-        <li>
+        <li className={styles.date}>
           <time dateTime={date}>{formatDate(date)}</time>
         </li>
       )}
       {Array.isArray(categories) && categories[0] && (
-        <li className={styles.metadataCategories}>
+        <li className={styles.categories}>
           {compactCategories && (
             <p title={categories.map(({ name }) => name).join(", ")}>
               <Link href={categoryPathBySlug(categories[0].slug)}>
