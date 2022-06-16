@@ -1,0 +1,18 @@
+.imageContainer{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    max-height: 37rem;
+    object-fit: cover;
+    margin-bottom: 2rem;
+  }
+  .title {
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }

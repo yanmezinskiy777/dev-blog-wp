@@ -42,7 +42,9 @@ const Metadata: FC<IMetadata> = ({
               />
             )}
             <Link href={authorPathByName(author.name)}>
-              <a rel="author" className={styles.username}>{author.name}</a>
+              <a rel="author" className={styles.username}>
+                {author.name}
+              </a>
             </Link>
           </address>
         </li>

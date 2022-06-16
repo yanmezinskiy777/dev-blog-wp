@@ -10,6 +10,7 @@ export interface IPost {
   slug: string;
   title: string;
   featuredImage: IFeaturedImages;
+  content: string;
 }
 
 interface IFeaturedImages{

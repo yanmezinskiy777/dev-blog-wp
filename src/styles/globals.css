@@ -2,7 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: white;
 }
 
@@ -13,4 +13,12 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+p {
+  line-height: 1.6;
+  margin: 1.2em 0;
+  letter-spacing: -0.01em;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
