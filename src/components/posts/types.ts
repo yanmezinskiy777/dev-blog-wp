@@ -11,9 +11,40 @@ export interface IPost {
   title: string;
   featuredImage: IFeaturedImages;
   content: string;
+  metaTitle: string;
+  description: string;
+  canonical: string;
+  language: string;
+  imageUrl: string;
+  imageSecureUrl: string;
+  type: string;
+  twitter:{
+    title: string;
+  }
+  article: IArticle;
+  og: IOg;
 }
 
-interface IFeaturedImages{
+export interface IArticle {
+  author: string;
+  modifiedTime: string;
+  publishedTime: string;
+  publisher: string;
+}
+
+export interface IOg {
+  imageUrl: string;
+  imageSecureUrl: string;
+  imageWidth: number;
+  imageHeight: number;
+  description: string;
+  title: string;
+  type: string;
+  language: string;
+  canonical: string;
+  url: string;
+}
+interface IFeaturedImages {
   sourceUrl: string;
   srcSet: string;
 }

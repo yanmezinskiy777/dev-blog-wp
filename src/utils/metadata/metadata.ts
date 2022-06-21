@@ -1,6 +1,7 @@
 import { ISettingsMetadata } from "../../components/api/metadata/types";
+import { IArticle, IOg, IPost } from "../../components/posts/types";
 import { removeExtraSpaces } from "../baseUtils";
-import { IOptions, ISettings } from "./types";
+import { IOptions, IOptionsConstruct, IPageMetaData, ISettings } from "./types";
 
 export function helmetSettingsFromMetadata(
   metadata: ISettingsMetadata,
@@ -8,7 +9,7 @@ export function helmetSettingsFromMetadata(
 ) {
   const { link = [], meta = [], setTitle = true } = options;
 
-  const sanitizedDescription = removeExtraSpaces (metadata.description);
+  const sanitizedDescription = removeExtraSpaces(metadata.description);
 
   const settings: ISettings = {
     htmlAttributes: {
@@ -104,4 +105,106 @@ export function helmetSettingsFromMetadata(
   ].filter(({ content }) => !!content);
 
   return settings;
+}
+
+export function constructPageMetadata(
+  defaultMetadata: IPost,
+  pageMetadata: IPost,
+  options: IOptionsConstruct
+) {
+  const { router, homepage = "" } = options;
+  const { asPath } = router;
+
+  const url = `${homepage}${asPath}`;
+  const pathname = new URL(url).pathname;
+  const canonical = pageMetadata.canonical || `${homepage}${pathname}`;
+
+  const metadata: Partial<IPost> = {
+    description: "",
+    imageUrl: "",
+    imageSecureUrl: "",
+    title: "",
+    type: "",
+    language: "",
+    canonical: canonical,
+    twitter: {
+      title: "",
+    },
+  };
+
+  const og: IOg = {
+    description: "",
+    imageUrl: "",
+    imageHeight: 0,
+    imageSecureUrl: "",
+    imageWidth: 0,
+    title: "",
+    type: "",
+    language: "",
+    canonical: "",
+    url: "",
+  };
+
+  const article: IArticle = {
+    author: "",
+    modifiedTime: "",
+    publishedTime: "",
+    publisher: "",
+  };
+
+  // Static Properties
+  // Loop through top level metadata properties that rely on a non-object value
+  const staticProperties = ["description", "language", "title"];
+
+  staticProperties.forEach((property: string) => {
+    const value: any = pageMetadata[property as keyof IPost]
+      ? pageMetadata[property as keyof IPost]
+      : defaultMetadata[property as keyof IPost];
+    if (value) {
+      metadata[property as keyof IPost] = value;
+    }
+  });
+
+  // Open Graph Properties
+  // Loop through Open Graph properties that rely on a non-object value
+
+  if (pageMetadata.og) {
+    const ogProperties: Array<keyof IOg> = [
+      "description",
+      "imageUrl",
+      "imageHeight",
+      "imageSecureUrl",
+      "imageWidth",
+      "title",
+      "type",
+    ];
+
+    // ogProperties.forEach((property: string) => {
+    //     const pageOg = pageMetadata.og[property as keyof IOg];
+    //     const pageStatic = pageMetadata[property as keyof IPost];
+    //     const defaultOg = defaultMetadata.og[property as keyof IOg];
+    //     const defaultStatic = defaultMetadata[property as keyof IPost];
+    //     const value: any = pageOg || pageStatic || defaultOg || defaultStatic;
+    //     type TOg = keyof IOg & keyof IPost;
+    //     og[property as TOg] = value;
+    // });
+  }
+  // Article Properties
+  // Loop through article properties that rely on a non-object value
+
+  if (pageMetadata.og.type === "article" && pageMetadata.article) {
+    const articleProperties: string[] = [
+      "author",
+      "modifiedTime",
+      "publishedTime",
+      "publisher",
+    ];
+
+    articleProperties.forEach((property: string) => {
+      const value: any = pageMetadata.article[property as keyof IArticle];
+      article[property as keyof IArticle] = value;
+    });
+  }
+
+  return { ...metadata, og, article };
 }

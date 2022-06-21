@@ -1,3 +1,4 @@
+import { NextRouter } from "next/router";
 
 export interface IOptions {
   link?: ILink[];
@@ -26,3 +27,13 @@ export interface ISettings {
     lang?: string;
   };
 }
+
+export interface IOptionsConstruct{
+  router: NextRouter;
+  homepage: string;
+}
+
+export type IPageMetaData = {
+  og: { [key: string]: string }
+  article: { [key: string]: string }
+} & { [key: string]: string }

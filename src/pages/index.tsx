@@ -3,6 +3,7 @@ import { getPaginatedPosts } from "../components/api/posts/posts";
 import PostCard from "../components/posts/PostCard";
 import { IPost } from "../components/posts/types";
 import Layout from "../components/structure/Layout";
+import Section from "../components/structure/Section";
 import styles from "../styles/Home.module.css";
 
 interface IHome {
@@ -15,17 +16,19 @@ const Home: NextPage<IHome> = ({ posts, pagination }) => {
   console.log(pagination);
   return (
     <Layout>
-      <div className={styles.container}>
-        <div className={styles.posts}>
-          {posts?.map((post: IPost) => (
-            <PostCard key={post.id} post={post} />
-          ))}
+      <Section>
+        <div className={styles.container}>
+          <div className={styles.posts}>
+            {posts?.map((post: IPost) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </div>
+          <div className={styles.toolbar}>
+            <div>Good Posts</div>
+            <div>Categories</div>
+          </div>
         </div>
-        <div className={styles.toolbar}>
-          <div>Good Posts</div>
-          <div>Categories</div>
-        </div>
-      </div>
+      </Section>
     </Layout>
   );
 };
