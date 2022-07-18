@@ -1,7 +1,7 @@
 import { ISettingsMetadata } from "../../components/api/metadata/types";
 import { IArticle, IOg, IPost } from "../../components/posts/types";
 import { removeExtraSpaces } from "../baseUtils";
-import { IOptions, IOptionsConstruct, IPageMetaData, ISettings } from "./types";
+import { IOptions, IOptionsConstruct, ISettings } from "./types";
 
 export function helmetSettingsFromMetadata(
   metadata: ISettingsMetadata,
@@ -109,7 +109,7 @@ export function helmetSettingsFromMetadata(
 
 export function constructPageMetadata(
   defaultMetadata: IPost,
-  pageMetadata: IPost,
+  pageMetadata: Partial<IPost>,
   options: IOptionsConstruct
 ) {
   const { router, homepage = "" } = options;
@@ -179,20 +179,33 @@ export function constructPageMetadata(
       "type",
     ];
 
+    //TODO: FIX ERROR OG
     // ogProperties.forEach((property: string) => {
-    //     const pageOg = pageMetadata.og[property as keyof IOg];
-    //     const pageStatic = pageMetadata[property as keyof IPost];
-    //     const defaultOg = defaultMetadata.og[property as keyof IOg];
-    //     const defaultStatic = defaultMetadata[property as keyof IPost];
+    //   let pageOg, defaultOg, pageStatic, defaultStatic;
+    //   if (property) {
+    //     if (pageMetadata.og.hasOwnProperty(property)) {
+    //       if (pageMetadata.og[property as keyof IOg]) {
+    //         pageOg = pageMetadata.og[property as keyof IOg];
+    //         defaultOg = defaultMetadata.og[property as keyof IOg];
+    //       }
+    //     } else if (pageMetadata.hasOwnProperty(property)) {
+    //       if (pageMetadata[property as keyof IPost]) {
+    //         pageStatic = pageMetadata[property as keyof IPost];
+    //         defaultStatic = defaultMetadata[property as keyof IPost];
+    //       }
+    //     }
     //     const value: any = pageOg || pageStatic || defaultOg || defaultStatic;
     //     type TOg = keyof IOg & keyof IPost;
-    //     og[property as TOg] = value;
+    //     if (value) {
+    //       og[property as Partial<TOg>] = value;
+    //     }
+    //   }
     // });
   }
   // Article Properties
   // Loop through article properties that rely on a non-object value
 
-  if (pageMetadata.og.type === "article" && pageMetadata.article) {
+  if (pageMetadata && pageMetadata.hasOwnProperty("og") && pageMetadata.og!.type === "article" && pageMetadata.article) {
     const articleProperties: string[] = [
       "author",
       "modifiedTime",
@@ -201,7 +214,7 @@ export function constructPageMetadata(
     ];
 
     articleProperties.forEach((property: string) => {
-      const value: any = pageMetadata.article[property as keyof IArticle];
+      const value: any = pageMetadata.article![property as keyof IArticle];
       article[property as keyof IArticle] = value;
     });
   }

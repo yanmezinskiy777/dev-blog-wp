@@ -4,6 +4,7 @@ import PostCard from "../components/posts/PostCard";
 import { IPost } from "../components/posts/types";
 import Layout from "../components/structure/Layout";
 import Section from "../components/structure/Section";
+import Paginataion from "../components/structure/Pagination";
 import styles from "../styles/Home.module.css";
 
 interface IHome {
@@ -28,6 +29,14 @@ const Home: NextPage<IHome> = ({ posts, pagination }) => {
             <div>Categories</div>
           </div>
         </div>
+        {pagination && (
+          <Paginataion
+            addCanonical={false}
+            currentPage={pagination?.currentPage}
+            pagesCount={pagination?.pagesCount}
+            basePath={pagination?.basePath}
+          />
+        )}
       </Section>
     </Layout>
   );

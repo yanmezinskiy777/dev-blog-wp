@@ -32,8 +32,3 @@ export interface IOptionsConstruct{
   router: NextRouter;
   homepage: string;
 }
-
-export type IPageMetaData = {
-  og: { [key: string]: string }
-  article: { [key: string]: string }
-} & { [key: string]: string }

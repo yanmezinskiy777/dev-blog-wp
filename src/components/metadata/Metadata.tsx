@@ -11,7 +11,7 @@ const DEFAULT_METADATA_OPTIONS = {
   compactCategories: true,
 };
 
-interface IMetadata {
+export interface IMetadata {
   author: IAuthor;
   date: string;
   categories: ICategories[];

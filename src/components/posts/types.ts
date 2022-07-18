@@ -18,6 +18,7 @@ export interface IPost {
   imageUrl: string;
   imageSecureUrl: string;
   type: string;
+  modified: string;
   twitter:{
     title: string;
   }

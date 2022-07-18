@@ -130,7 +130,7 @@ export async function getPostsPerPage() {
   }
 }
 
-export async function getPagesCount(posts: any, postsPerPage: any) {
+export async function getPagesCount(posts: any, postsPerPage?: any) {
   const _postsPerPage = postsPerPage ?? (await getPostsPerPage());
   return Math.ceil(posts.length / _postsPerPage);
 }

@@ -4,5 +4,5 @@ export interface IPaginatePosts {
 }
 
 export interface IOptionsGetAllPosts{
-    queryIncludes: "archive" | "index" | "all";
+  queryIncludes: "archive" | "index" | "all";
 }

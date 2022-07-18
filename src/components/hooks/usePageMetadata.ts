@@ -8,7 +8,7 @@ import { IPost } from "../posts/types";
 export default function usePageMetadata({
   metadata: pageMetadata,
 }: {
-  metadata: IPost;
+  metadata: Partial<IPost>;
 }) {
   const { metadata: defaultMetadata } = useContext(AppContext);
 
