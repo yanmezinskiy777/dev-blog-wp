@@ -1,20 +1,24 @@
 import type { NextPage } from "next";
 import { getPaginatedPosts } from "../components/api/posts/posts";
 import PostCard from "../components/posts/PostCard";
-import { IPost } from "../components/posts/types";
+import { ICategories, IPost } from "../components/posts/types";
 import Layout from "../components/structure/Layout";
 import Section from "../components/structure/Section";
 import Paginataion from "../components/structure/Pagination";
 import styles from "../styles/Home.module.css";
+import { getAllCategories } from "../components/api/categories/categories";
+import Categories from "../components/structure/Categories";
 
 interface IHome {
   posts: any;
   pagination: any;
+  categories: ICategories[];
 }
 
-const Home: NextPage<IHome> = ({ posts, pagination }) => {
+const Home: NextPage<IHome> = ({ posts, pagination, categories }) => {
   console.log(posts);
   console.log(pagination);
+  console.log(categories);
   return (
     <Layout>
       <Section>
@@ -26,7 +30,7 @@ const Home: NextPage<IHome> = ({ posts, pagination }) => {
           </div>
           <div className={styles.toolbar}>
             <div>Good Posts</div>
-            <div>Categories</div>
+            <Categories categories={categories} />
           </div>
         </div>
         {pagination && (
@@ -48,8 +52,11 @@ export async function getStaticProps() {
     options: { queryIncludes: "archive" },
   });
 
+  const { categories } = await getAllCategories();
+
   return {
     props: {
+      categories,
       posts,
       pagination: {
         ...pagination,
