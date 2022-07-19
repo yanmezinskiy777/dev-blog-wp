@@ -4,11 +4,51 @@ import {
   QUERY_ALL_POSTS,
   QUERY_ALL_POSTS_ARCHIVE,
   QUERY_ALL_POSTS_INDEX,
+  QUERY_POSTS_BY_CATEGORY_ID,
+  QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE,
+  QUERY_POSTS_BY_CATEGORY_ID_INDEX,
   QUERY_POST_BY_SLUG,
   QUERY_POST_PER_PAGE,
   QUERY_POST_SEO_BY_SLUG,
 } from "./query";
-import { IOptionsGetAllPosts, IPaginatePosts } from "./types";
+import { IGetPostsByCategoryId, IOptionsGetAllPosts, IPaginatePosts } from "./types";
+
+const postsByCategoryIdIncludesTypes = {
+  all: QUERY_POSTS_BY_CATEGORY_ID,
+  archive: QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE,
+  index: QUERY_POSTS_BY_CATEGORY_ID_INDEX,
+};
+
+export async function getPostsByCategoryId({
+  categoryId,
+  options,
+}: IGetPostsByCategoryId) {
+  const { queryIncludes = "index" } = options;
+
+  const apolloClient = getApolloClient();
+
+  let postData;
+
+  try {
+    postData = await apolloClient.query({
+      query: postsByCategoryIdIncludesTypes[queryIncludes],
+      variables: {
+        categoryId,
+      },
+    });
+  } catch (e: any) {
+    console.log(
+      `[posts][getPostsByCategoryId] Failed to query post data: ${e.message}`
+    );
+    throw e;
+  }
+
+  const posts = postData?.data.posts.edges.map(({ node = {} }) => node);
+
+  return {
+    posts: Array.isArray(posts) && posts.map((post) => normalizationPost(post)),
+  };
+}
 
 export function updateUserAvatar(avatar: any) {
   // The URL by default that comes from Gravatar / WordPress is not a secure
@@ -139,7 +179,6 @@ export function sortStickyPosts(posts: any) {
   return [...posts].sort((post) => (post.isSticky ? -1 : 1));
 }
 
-
 export async function getPostBySlug(slug?: string | string[]) {
   const apolloClient = getApolloClient();
   const apiHost = new URL(process.env.WORDPRESS_GRAPHQL_ENDPOINT as any).host;
@@ -155,16 +194,18 @@ export async function getPostBySlug(slug?: string | string[]) {
       },
     });
   } catch (e: any) {
-    console.log(`[posts][getPostBySlug] Failed to query post data: ${e.message}`);
+    console.log(
+      `[posts][getPostBySlug] Failed to query post data: ${e.message}`
+    );
     throw e;
   }
 
-  const post = [postData?.data.post].map(post => normalizationPost(post))[0];
+  const post = [postData?.data.post].map((post) => normalizationPost(post))[0];
 
   // If the SEO plugin is enabled, look up the data
   // and apply it to the default settings
 
-  if ((Boolean(process.env.WORDPRESS_PLUGIN_SEO)) === true) {
+  if (Boolean(process.env.WORDPRESS_PLUGIN_SEO) === true) {
     try {
       seoData = await apolloClient.query({
         query: QUERY_POST_SEO_BY_SLUG,
@@ -173,8 +214,12 @@ export async function getPostBySlug(slug?: string | string[]) {
         },
       });
     } catch (e: any) {
-      console.log(`[posts][getPostBySlug] Failed to query SEO plugin: ${e.message}`);
-      console.log('Is the SEO Plugin installed? If not, disable WORDPRESS_PLUGIN_SEO in next.config.js.');
+      console.log(
+        `[posts][getPostBySlug] Failed to query SEO plugin: ${e.message}`
+      );
+      console.log(
+        "Is the SEO Plugin installed? If not, disable WORDPRESS_PLUGIN_SEO in next.config.js."
+      );
       throw e;
     }
 

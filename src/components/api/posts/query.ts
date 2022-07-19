@@ -201,3 +201,80 @@ export const QUERY_POST_SEO_BY_SLUG = gql`
     }
   }
 `;
+
+export const QUERY_POSTS_BY_CATEGORY_ID_INDEX = gql`
+  ${POST_FIELDS}
+  query PostsByCategoryId($categoryId: Int!) {
+    posts(where: { categoryId: $categoryId, hasPassword: false }) {
+      edges {
+        node {
+          ...PostFields
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE = gql`
+  ${POST_FIELDS}
+  query PostsByCategoryId($categoryId: Int!) {
+    posts(where: { categoryId: $categoryId, hasPassword: false }) {
+      edges {
+        node {
+          ...PostFields
+          author {
+            node {
+              avatar {
+                height
+                url
+                width
+              }
+              id
+              name
+              slug
+            }
+          }
+          excerpt
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_POSTS_BY_CATEGORY_ID = gql`
+  ${POST_FIELDS}
+  query PostsByCategoryId($categoryId: Int!) {
+    posts(where: { categoryId: $categoryId, hasPassword: false }) {
+      edges {
+        node {
+          ...PostFields
+          author {
+            node {
+              avatar {
+                height
+                url
+                width
+              }
+              id
+              name
+              slug
+            }
+          }
+          content
+          excerpt
+          featuredImage {
+            node {
+              altText
+              caption
+              id
+              sizes
+              sourceUrl
+              srcSet
+            }
+          }
+          modified
+        }
+      }
+    }
+  }
+`;

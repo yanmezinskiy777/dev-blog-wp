@@ -12,10 +12,10 @@ import PostCard from "../posts/PostCard";
 import Paginataion from "../structure/Pagination";
 
 interface ITemplate {
-  title: string;
+  title?: string;
   posts: IPost[];
   slug: string;
-  pagination: IPagination;
+  pagination?: IPagination;
   metadata: ISettingsMetadata;
 }
 

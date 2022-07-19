@@ -6,3 +6,10 @@ export interface IPaginatePosts {
 export interface IOptionsGetAllPosts{
   queryIncludes: "archive" | "index" | "all";
 }
+
+export interface IGetPostsByCategoryId {
+  categoryId: string;
+  options: {
+    queryIncludes: "index" | "all" | "archive";
+  };
+}
