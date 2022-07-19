@@ -10,20 +10,16 @@ interface ICategoriesProps {
 
 const Categories: FC<ICategoriesProps> = ({ categories }) => {
   return (
-    <div className={styles.categories}>
-      <h3>Категории</h3>
-      <hr />
-      <ul>
-        {categories &&
-          categories.map((category) => (
-            <li className={styles.category} key={category.id}>
-              <Link href={`${categoryPathBySlug(category.slug)}`}>
-                <a>{category.name}</a>
-              </Link>
-            </li>
-          ))}
-      </ul>
-    </div>
+    <ul className={styles.categories}>
+      {categories &&
+        categories.map((category) => (
+          <li className={styles.category} key={category.id}>
+            <Link href={`${categoryPathBySlug(category.slug)}`}>
+              <a>{category.name}</a>
+            </Link>
+          </li>
+        ))}
+    </ul>
   );
 };
 

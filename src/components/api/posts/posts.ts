@@ -11,7 +11,11 @@ import {
   QUERY_POST_PER_PAGE,
   QUERY_POST_SEO_BY_SLUG,
 } from "./query";
-import { IGetPostsByCategoryId, IOptionsGetAllPosts, IPaginatePosts } from "./types";
+import {
+  IGetPostsByCategoryId,
+  IOptionsGetAllPosts,
+  IPaginatePosts,
+} from "./types";
 
 const postsByCategoryIdIncludesTypes = {
   all: QUERY_POSTS_BY_CATEGORY_ID,
@@ -116,6 +120,22 @@ export async function getAllPosts(options: IOptionsGetAllPosts) {
 
   const posts = data.data.posts.edges.map(({ node }: any) => node);
 
+  return {
+    posts: Array.isArray(posts)
+      ? posts.map((post) => normalizationPost(post))
+      : [],
+  };
+}
+
+export async function getRecentPosts(count: number = 3) {
+  const apolloClient = getApolloClient();
+
+  const data = await apolloClient.query({
+    query: allPostsIncludesTypes["all"],
+  });
+  const posts = data.data.posts.edges
+    .map(({ node }: any) => node)
+    .splice(0, count);
   return {
     posts: Array.isArray(posts)
       ? posts.map((post) => normalizationPost(post))
