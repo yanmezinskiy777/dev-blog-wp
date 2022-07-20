@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import NextApp from "next/app";
+import NextNProgress from "nextjs-progressbar";
 import { AppContext, useAppContext } from "../components/hooks/useApp";
 import { getSiteMetadata } from "../components/api/metadata/metadata";
 import { ISettingsMetadata } from "../components/api/metadata/types";
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps, metadata }: MyApp) {
   return (
     <ApolloProvider client={apolloClient}>
       <AppContext.Provider value={data}>
+        <NextNProgress />
         <Component {...pageProps} />
       </AppContext.Provider>
     </ApolloProvider>

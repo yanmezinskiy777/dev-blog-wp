@@ -4,16 +4,20 @@ import {
   getAllPosts,
   getPagesCount,
   getPaginatedPosts,
+  getRecentPosts,
 } from "../../../components/api/posts/posts";
 import Template from "../../../components/templates/Template";
 import { GetStaticProps } from "next";
+import { getAllCategories } from "../../../components/api/categories/categories";
 
 interface IPagePosts {
   posts: any;
   pagination: any;
+  recentPosts: any;
+  categories: any;
 }
 
-export default function Posts({ posts, pagination }: IPagePosts) {
+export default function Posts({ posts, pagination, recentPosts, categories }: IPagePosts) {
   const title = `All Posts`;
   const slug = "posts";
 
@@ -31,6 +35,8 @@ export default function Posts({ posts, pagination }: IPagePosts) {
       slug={slug}
       pagination={pagination}
       metadata={metadata as any}
+      recentPosts={recentPosts}
+      categories={categories}
     />
   );
 }
@@ -40,8 +46,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     currentPage: params && Number(params.page) ? Number(params.page) : 1,
     options: { queryIncludes: "archive" },
   });
+
+  const { posts: recentPosts } = await getRecentPosts(3);
+
+  const { categories } = await getAllCategories();
+  
   return {
     props: {
+      recentPosts,
+      categories,
       posts,
       pagination: {
         ...pagination,

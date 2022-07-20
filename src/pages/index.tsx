@@ -10,9 +10,8 @@ import Section from "../components/structure/Section";
 import Paginataion from "../components/structure/Pagination";
 import styles from "../styles/Home.module.css";
 import { getAllCategories } from "../components/api/categories/categories";
-import Categories from "../components/structure/Categories";
-import RecentPosts from "../components/structure/RecentPosts";
-import SideBar from "../components/structure/SideBar";
+import Toolbar from "../components/structure/Toolbar";
+import Container from "../components/structure/Container";
 
 interface IHome {
   posts: any;
@@ -34,21 +33,16 @@ const Home: NextPage<IHome> = ({
   return (
     <Layout>
       <Section>
-        <div className={styles.container}>
+        <Container>
           <div className={styles.posts}>
             {posts?.map((post: IPost) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>
-          <div className={styles.toolbar}>
-            <SideBar title="Последние посты">
-              <RecentPosts posts={recentPosts} />
-            </SideBar>
-            <SideBar title="Категории">
-              <Categories categories={categories} />
-            </SideBar>
+          <div>
+            <Toolbar recentPosts={recentPosts} categories={categories} />
           </div>
-        </div>
+        </Container>
         {pagination && (
           <Paginataion
             addCanonical={false}

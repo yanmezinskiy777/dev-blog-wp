@@ -1,10 +1,33 @@
-.Content{
-    max-width: 60rem;
-    padding: 0 2rem;
-    margin: 0 auto;
+.Content img {
+  display: block;
 }
-.Content img{
-    display: block;
-    width: 100%;
-    height: auto;
+.Content p {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+}
+
+.Content h2 h3 h4 h5 h6 {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.Content code {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #f36d33;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+  margin-bottom: 2rem;
 }

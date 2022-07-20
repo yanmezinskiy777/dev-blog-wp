@@ -4,16 +4,26 @@ import {
   getCategoryBySlug,
 } from "../../components/api/categories/categories";
 import { ICategories } from "../../components/api/categories/types";
-import { getPostsByCategoryId } from "../../components/api/posts/posts";
+import {
+  getPostsByCategoryId,
+  getRecentPosts,
+} from "../../components/api/posts/posts";
 import usePageMetadata from "../../components/hooks/usePageMetadata";
 import Template from "../../components/templates/Template";
 
 interface IPagePosts {
   posts: any;
   category: any;
+  recentPosts: any;
+  categories: any;
 }
 
-export default function Categories({ posts, category }: IPagePosts) {
+export default function Categories({
+  posts,
+  category,
+  recentPosts,
+  categories,
+}: IPagePosts) {
   const { name, description, slug } = category;
 
   const { metadata } = usePageMetadata({
@@ -26,7 +36,15 @@ export default function Categories({ posts, category }: IPagePosts) {
     },
   });
 
-  return <Template posts={posts} slug={slug} metadata={metadata as any} />;
+  return (
+    <Template
+      posts={posts}
+      slug={slug}
+      metadata={metadata as any}
+      recentPosts={recentPosts}
+      categories={categories}
+    />
+  );
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -37,8 +55,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     options: { queryIncludes: "archive" },
   });
 
+  const { posts: recentPosts } = await getRecentPosts(3);
+
+  const { categories } = await getAllCategories();
+
   return {
     props: {
+      recentPosts,
+      categories,
       category,
       posts,
     },

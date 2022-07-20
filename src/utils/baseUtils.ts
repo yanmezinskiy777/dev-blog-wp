@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+const { ru } = require("date-fns/locale");
 
 export function removeExtraSpaces(text?: string) {
   if (typeof text !== "string") return;
@@ -29,5 +30,5 @@ export function decodeHtmlEntities(text?: string) {
 }
 
 export function formatDate(date: string, pattern = "PPP") {
-  return format(new Date(date), pattern);
+  return format(new Date(date), pattern, { locale: ru });
 }

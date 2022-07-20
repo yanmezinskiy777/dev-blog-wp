@@ -17,6 +17,10 @@ module.exports = {
 
     OG_IMAGE_DIRECTORY: '/images/og',
   },
+  i18n: {
+    locales: ["ru"],
+    defaultLocale: "ru",
+  },
   nextConfig
 }
 

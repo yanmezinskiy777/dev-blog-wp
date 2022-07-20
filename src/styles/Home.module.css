@@ -1,19 +1,7 @@
-.container {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 30%;
-  grid-column-gap: 3rem;
-}
 .posts {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-row-gap: 2rem;
-}
-.toolbar {
-  width: 100%;
-}
-.toolbar > *:not(:last-child) {
-  margin-bottom: 2rem;
 }

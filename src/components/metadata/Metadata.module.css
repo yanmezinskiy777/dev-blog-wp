@@ -2,10 +2,20 @@
   display: flex;
   width: 100%;
   list-style: none;
-  align-items: center;
-  justify-content: center;
   margin-block-start: 0;
   margin-block-end: 0;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+.center {
+  justify-content: center;
+}
+.left {
+  justify-content: flex-start;
+  padding-inline-start: 0px;
+}
+.left li:first-child {
+  margin-left: 0px !important;
 }
 .metadata li {
   margin-right: 1rem;
@@ -38,4 +48,6 @@
 }
 .categories p {
   font-size: 1rem;
+  padding: 0;
+  margin: 0;
 }

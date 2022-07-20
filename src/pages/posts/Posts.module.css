@@ -1,20 +1,28 @@
-.imageContainer{
-    display: block;
-    width: 100%;
-    height: auto;
+.imageContainer {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .image {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    max-height: 30rem;
-    object-fit: cover;
-    margin-bottom: 2rem;
-  }
-  .title {
-    margin-top: 0;
-    margin-bottom: 2rem;
-    font-size: 4rem;
-    line-height: 1.15;
-  }
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  max-height: 30rem;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+.title {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+.postBody {
+  width: 100%;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  color: black;
+}

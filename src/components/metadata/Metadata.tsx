@@ -15,6 +15,7 @@ export interface IMetadata {
   author: IAuthor;
   date: string;
   categories: ICategories[];
+  type: "center" | "left";
   options?: {
     compactCategories: boolean;
   };
@@ -25,10 +26,12 @@ const Metadata: FC<IMetadata> = ({
   date,
   categories,
   options = DEFAULT_METADATA_OPTIONS,
+  type = "center",
 }) => {
   const { compactCategories } = options;
+  const metaDataClass = type === "center" ? [styles.metadata, styles.center] : [styles.metadata, styles.left];
   return (
-    <ul className={styles.metadata}>
+    <ul className={metaDataClass.join(" ")}>
       {author && (
         <li className={styles.avatar}>
           <address>

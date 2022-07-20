@@ -6,6 +6,7 @@
   border-radius: 0.5rem;
   padding: 2rem;
   color: black;
+  height: min-content;
 }
 .image {
   display: block;
@@ -19,8 +20,17 @@
 .title {
   margin-top: 0;
   margin-bottom: 2rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
 }
 .excerpt {
   margin-top: 0;
   margin-bottom: 2rem;
+}
+.excerpt p {
+  font-size: 1.125rem;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 }

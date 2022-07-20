@@ -21,7 +21,7 @@ const PostCard: FC<{ post: IPost }> = ({ post }) => {
         />
       )}
       {title && (
-        <h1
+        <h2
           className={styles.title}
           dangerouslySetInnerHTML={{
             __html: title,

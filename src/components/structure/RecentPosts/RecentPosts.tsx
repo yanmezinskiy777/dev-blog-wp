@@ -5,7 +5,6 @@ import { formatDate } from "../../../utils/baseUtils";
 import { getPostLink } from "../../../utils/posts";
 import { IPost } from "../../posts/types";
 import styles from "./RecentPosts.module.css";
-import Image from "next/image";
 
 interface IRecientPost {
   posts: IPost[];

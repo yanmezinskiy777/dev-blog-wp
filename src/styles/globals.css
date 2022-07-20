@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  color: white;
+  color: black;
 }
 
 a {
@@ -21,4 +21,9 @@ p {
   letter-spacing: -0.01em;
   font-size: 1.5rem;
   font-weight: 400;
+}
+h2 h3 h4 h5 h6 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
 }

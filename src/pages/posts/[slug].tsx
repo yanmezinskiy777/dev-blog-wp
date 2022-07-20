@@ -2,7 +2,11 @@
 import { GetStaticProps } from "next";
 import React from "react";
 import { Helmet } from "react-helmet";
-import { getAllPosts, getPostBySlug } from "../../components/api/posts/posts";
+import {
+  getAllPosts,
+  getPostBySlug,
+  getRecentPosts,
+} from "../../components/api/posts/posts";
 import useApp from "../../components/hooks/useApp";
 import Metadata from "../../components/metadata";
 import { IPost } from "../../components/posts/types";
@@ -11,14 +15,19 @@ import Layout from "../../components/structure/Layout";
 import PostHeader from "../../components/structure/PostHeader";
 import Section from "../../components/structure/Section";
 import { helmetSettingsFromMetadata } from "../../utils/metadata/metadata";
-import usePageMetadata from "../../components/hooks/usePageMetadata"
+import usePageMetadata from "../../components/hooks/usePageMetadata";
 import styles from "./Posts.module.css";
+import { getAllCategories } from "../../components/api/categories/categories";
+import Container from "../../components/structure/Container";
+import Toolbar from "../../components/structure/Toolbar";
 
 interface IPostPage {
   post: IPost;
+  recentPosts: any;
+  categories: any;
 }
 
-const Posts = ({ post }: IPostPage) => {
+const Posts = ({ post, recentPosts, categories: allCategories }: IPostPage) => {
   const {
     title,
     metaTitle,
@@ -43,7 +52,8 @@ const Posts = ({ post }: IPostPage) => {
     metadata: {
       ...post,
       title: metaTitle,
-      description: description || post.og?.description || `Read more about ${title}`,
+      description:
+        description || post.og?.description || `Read more about ${title}`,
     },
   });
 
@@ -52,55 +62,66 @@ const Posts = ({ post }: IPostPage) => {
     metadata.og.title = metadata.title;
     metadata.twitter!.title = metadata.title;
   }
-  
+
   const helmetStteings = helmetSettingsFromMetadata(metadata, {});
 
   return (
     <Layout>
-      <Helmet {...helmetStteings as any} />
-      <Content>
-        <Section>
-          <PostHeader>
-            {featuredImage?.sourceUrl && (
-              <div className={styles.imageContainer}>
-                <img
-                  srcSet={featuredImage.srcSet}
-                  src={featuredImage.sourceUrl}
-                  alt={title}
-                  className={styles.image}
+      <Helmet {...(helmetStteings as any)} />
+      <Section>
+        <Container>
+          <article className={styles.postBody}>
+            <PostHeader>
+              {featuredImage?.sourceUrl && (
+                <div className={styles.imageContainer}>
+                  <img
+                    srcSet={featuredImage.srcSet}
+                    src={featuredImage.sourceUrl}
+                    alt={title}
+                    className={styles.image}
+                  />
+                </div>
+              )}
+               <Metadata author={author} date={date} categories={categories} type="left" />
+              {title && (
+                <h1
+                  className={styles.title}
+                  dangerouslySetInnerHTML={{
+                    __html: title,
+                  }}
                 />
-              </div>
-            )}
-            {title && (
-              <h1
-                className={styles.title}
+              )}
+             
+            </PostHeader>
+            <Content>
+              <div
+                className={styles.content}
                 dangerouslySetInnerHTML={{
-                  __html: title,
+                  __html: content,
                 }}
               />
-            )}
-            <Metadata author={author} date={date} categories={categories} />
-          </PostHeader>
-        </Section>
-      </Content>
-      <Content>
-        <Section>
-          <div
-            className={styles.content}
-            dangerouslySetInnerHTML={{
-              __html: content,
-            }}
-          />
-        </Section>
-      </Content>
+            </Content>
+          </article>
+          <div>
+            <Toolbar recentPosts={recentPosts} categories={allCategories} />
+          </div>
+        </Container>
+      </Section>
     </Layout>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params = {} }) => {
   const { post } = await getPostBySlug(params.slug);
+
+  const { posts: recentPosts } = await getRecentPosts(3);
+
+  const { categories } = await getAllCategories();
+
   return {
     props: {
+      recentPosts,
+      categories,
       post,
     },
   };
