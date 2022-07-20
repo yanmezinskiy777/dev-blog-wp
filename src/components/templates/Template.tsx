@@ -1,17 +1,17 @@
-import React, { FC } from "react";
-import { Helmet } from "react-helmet";
-import { helmetSettingsFromMetadata } from "../../utils/metadata/metadata";
-import { ISettingsMetadata } from "../api/metadata/types";
-import useApp from "../hooks/useApp";
-import { IPost } from "../structure/PostCard/PostCardItem/types";
-import Layout from "../structure/Layout";
-import { IPagination } from "../structure/Pagination/Pagination";
-import styles from "../../styles/Home.module.css";
-import Section from "../structure/Section";
-import { PostCard } from "../structure/";
-import Paginataion from "../structure/Pagination";
-import Toolbar from "../structure/Toolbar";
-import Container from "../structure/Container";
+import React, { FC } from 'react';
+import { Helmet } from 'react-helmet';
+import { helmetSettingsFromMetadata } from '../../utils/metadata/metadata';
+import { ISettingsMetadata } from '../api/metadata/types';
+import useApp from '../hooks/useApp';
+import { IPost } from '../structure/PostCard/PostCardItem/types';
+import Layout from '../structure/Layout';
+import { IPagination } from '../structure/Pagination/Pagination';
+import styles from '../../styles/Home.module.css';
+import Section from '../structure/Section';
+import { PostCard } from '../structure/';
+import Paginataion from '../structure/Pagination';
+import Toolbar from '../structure/Toolbar';
+import Container from '../structure/Container';
 
 interface ITemplate {
   TitleComponent?: JSX.Element;
@@ -32,7 +32,7 @@ const Template: FC<ITemplate> = ({
   metadata,
   recentPosts,
   categories,
-  TitleComponent = undefined
+  TitleComponent = undefined,
 }) => {
   const { metadata: siteMetadata } = useApp();
 
@@ -48,17 +48,17 @@ const Template: FC<ITemplate> = ({
     <Layout>
       <Helmet {...(helmetStteings as any)} />
       <Section>
-         {TitleComponent && TitleComponent}
-         <Container>
+        {TitleComponent && TitleComponent}
+        <Container>
           <div className={styles.posts}>
             {posts?.map((post: IPost) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>
           <div>
-              <Toolbar recentPosts={recentPosts} categories={categories} />
+            <Toolbar recentPosts={recentPosts} categories={categories} />
           </div>
-         </Container>
+        </Container>
         {pagination && (
           <Paginataion
             addCanonical={false}

@@ -1,10 +1,10 @@
-import Link from "next/link";
-import React, { FC } from "react";
-import { Helmet } from "react-helmet";
-import { GrPrevious as PreviousIcon, GrNext as NextIcon } from "react-icons/gr";
+import Link from 'next/link';
+import React, { FC } from 'react';
+import { Helmet } from 'react-helmet';
+import { GrPrevious as PreviousIcon, GrNext as NextIcon } from 'react-icons/gr';
 
-import { HiOutlineDotsHorizontal as Dots } from "react-icons/hi";
-import styles from "./Pagination.module.css";
+import { HiOutlineDotsHorizontal as Dots } from 'react-icons/hi';
+import styles from './Pagination.module.css';
 
 export interface IPagination {
   basePath: string;
@@ -15,12 +15,7 @@ export interface IPagination {
 
 const MAX_NUM_PAGES = 9;
 
-const Pagination: FC<IPagination> = ({
-  basePath,
-  currentPage,
-  pagesCount,
-  addCanonical = true,
-}) => {
+const Pagination: FC<IPagination> = ({ basePath, currentPage, pagesCount, addCanonical = true }) => {
   const homepage = process.env.HOME_PAGE;
   const path = `${basePath}/page/`;
   const hasPrevPage = currentPage > 1 && pagesCount > 1;
@@ -57,22 +52,12 @@ const Pagination: FC<IPagination> = ({
   return (
     <>
       <Helmet>
-        {addCanonical && !hasPrevPage && (
-          <link rel="canonical" href={`${homepage}${basePath}`} />
-        )}
-        {hasPrevPage && (
-          <link rel="prev" href={`${homepage}${path}${currentPage - 1}`} />
-        )}
-        {hasNextPage && (
-          <link rel="next" href={`${homepage}${path}${currentPage + 1}`} />
-        )}
+        {addCanonical && !hasPrevPage && <link rel="canonical" href={`${homepage}${basePath}`} />}
+        {hasPrevPage && <link rel="prev" href={`${homepage}${path}${currentPage - 1}`} />}
+        {hasNextPage && <link rel="next" href={`${homepage}${path}${currentPage + 1}`} />}
       </Helmet>
 
-      <nav
-        className={styles.nav}
-        role="navigation"
-        aria-label="Pagination Navigation"
-      >
+      <nav className={styles.nav} role="navigation" aria-label="Pagination Navigation">
         {hasPrevPage && (
           <Link href={`${path}${currentPage - 1}`}>
             <a className={styles.prev} aria-label="Goto Previous Page">
@@ -95,11 +80,7 @@ const Pagination: FC<IPagination> = ({
             const active = page === currentPage;
             return active ? (
               <li key={page}>
-                <span
-                  className={styles.active}
-                  aria-label={`Current Page, Page ${page}`}
-                  aria-current="true"
-                >
+                <span className={styles.active} aria-label={`Current Page, Page ${page}`} aria-current="true">
                   {page}
                 </span>
               </li>
@@ -115,11 +96,7 @@ const Pagination: FC<IPagination> = ({
           })}
           {hasNextDots && (
             <li className={styles.dots}>
-              <Dots
-                aria-label={`Navigation to pages ${
-                  pages[pages.length - 1] + 1
-                }-${pagesCount} hidden`}
-              />
+              <Dots aria-label={`Navigation to pages ${pages[pages.length - 1] + 1}-${pagesCount} hidden`} />
             </li>
           )}
         </ul>

@@ -1,25 +1,18 @@
-import React, { FC } from "react";
-import { Metadata } from "../../"
-import { IPost } from "./types";
-import styles from "./PostCard.module.css";
-import Button from "../../../ui/button";
-import { getPostLink } from "../../../../utils/posts";
-
+import React, { FC } from 'react';
+import { Metadata } from '../../';
+import { IPost } from './types';
+import styles from './PostCard.module.css';
+import Button from '../../../ui/button';
+import { getPostLink } from '../../../../utils/posts';
 
 const PostCard: FC<{ post: IPost }> = ({ post }) => {
-  const { featuredImage, title, excerpt, slug, author, date, categories } =
-    post;
+  const { featuredImage, title, excerpt, slug, author, date, categories } = post;
 
   return (
     <article className={styles.post}>
       {featuredImage?.sourceUrl && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
-          srcSet={featuredImage.srcSet}
-          src={featuredImage.sourceUrl}
-          alt={title}
-          className={styles.image}
-        />
+        <img srcSet={featuredImage.srcSet} src={featuredImage.sourceUrl} alt={title} className={styles.image} />
       )}
       {title && (
         <h2

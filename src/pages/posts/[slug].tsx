@@ -1,25 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
-import { GetStaticProps } from "next";
-import React from "react";
-import { Helmet } from "react-helmet";
-import {
-  getAllPosts,
-  getPostBySlug,
-  getRecentPosts,
-} from "../../components/api/posts/posts";
-import useApp from "../../components/hooks/useApp";
-import Metadata from "../../components/structure/Metadata";
-import { IPost } from "../../components/structure/PostCard/PostCardItem/types";
-import Content from "../../components/structure/Content";
-import Layout from "../../components/structure/Layout";
-import PostHeader from "../../components/structure/PostHeader";
-import Section from "../../components/structure/Section";
-import { helmetSettingsFromMetadata } from "../../utils/metadata/metadata";
-import usePageMetadata from "../../components/hooks/usePageMetadata";
-import styles from "./Posts.module.css";
-import { getAllCategories } from "../../components/api/categories/categories";
-import Container from "../../components/structure/Container";
-import Toolbar from "../../components/structure/Toolbar";
+import { GetStaticProps } from 'next';
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { getAllPosts, getPostBySlug, getRecentPosts } from '../../components/api/posts/posts';
+import useApp from '../../components/hooks/useApp';
+import Metadata from '../../components/structure/Metadata';
+import { IPost } from '../../components/structure/PostCard/PostCardItem/types';
+import Content from '../../components/structure/Content';
+import Layout from '../../components/structure/Layout';
+import PostHeader from '../../components/structure/PostHeader';
+import Section from '../../components/structure/Section';
+import { helmetSettingsFromMetadata } from '../../utils/metadata/metadata';
+import usePageMetadata from '../../components/hooks/usePageMetadata';
+import styles from './Posts.module.css';
+import { getAllCategories } from '../../components/api/categories/categories';
+import Container from '../../components/structure/Container';
+import Toolbar from '../../components/structure/Toolbar';
 
 interface IPostPage {
   post: IPost;
@@ -40,7 +36,7 @@ const Posts = ({ post, recentPosts, categories: allCategories }: IPostPage) => {
     featuredImage,
     isSticky = false,
   } = post;
-  
+
   const { metadata: siteMetadata } = useApp();
 
   //post.og.imageUrl = `${homepage}${socialImage}`;
@@ -52,8 +48,7 @@ const Posts = ({ post, recentPosts, categories: allCategories }: IPostPage) => {
     metadata: {
       ...post,
       title: metaTitle,
-      description:
-        description || post.og?.description || `Read more about ${title}`,
+      description: description || post.og?.description || `Read more about ${title}`,
     },
   });
 
@@ -82,7 +77,7 @@ const Posts = ({ post, recentPosts, categories: allCategories }: IPostPage) => {
                   />
                 </div>
               )}
-               <Metadata author={author} date={date} categories={categories} type="left" />
+              <Metadata author={author} date={date} categories={categories} type="left" />
               {title && (
                 <h1
                   className={styles.title}
@@ -91,7 +86,6 @@ const Posts = ({ post, recentPosts, categories: allCategories }: IPostPage) => {
                   }}
                 />
               )}
-             
             </PostHeader>
             <Content>
               <div
@@ -129,10 +123,10 @@ export const getStaticProps: GetStaticProps = async ({ params = {} }) => {
 
 export async function getStaticPaths() {
   const { posts } = await getAllPosts({
-    queryIncludes: "index",
+    queryIncludes: 'index',
   });
   const paths = posts
-    .filter(({ slug }) => typeof slug === "string")
+    .filter(({ slug }) => typeof slug === 'string')
     .map(({ slug }) => {
       return {
         params: {

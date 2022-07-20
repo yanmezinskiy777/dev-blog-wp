@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
-import React, { FC } from "react";
-import { formatDate } from "../../../utils/baseUtils";
-import { getPostLink } from "../../../utils/posts";
-import { IPost } from "../PostCard/PostCardItem/types";
-import styles from "./RecentPosts.module.css";
+import Link from 'next/link';
+import React, { FC } from 'react';
+import { formatDate } from '../../../utils/baseUtils';
+import { getPostLink } from '../../../utils/posts';
+import { IPost } from '../PostCard/PostCardItem/types';
+import styles from './RecentPosts.module.css';
 
 interface IRecientPost {
   posts: IPost[];
@@ -22,11 +22,7 @@ const RecentPosts: FC<IRecientPost> = ({ posts }) => {
                   <div className={styles.item}>
                     <div className={styles.image}>
                       {post?.featuredImage?.srcSet ? (
-                        <img
-                          srcSet={post.featuredImage.srcSet}
-                          src={post.featuredImage.sourceUrl}
-                          alt={post.title}
-                        />
+                        <img srcSet={post.featuredImage.srcSet} src={post.featuredImage.sourceUrl} alt={post.title} />
                       ) : (
                         <img src="/images/placeholder.png" alt="post image" />
                       )}

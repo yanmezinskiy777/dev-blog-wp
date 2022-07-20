@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import styles from "./Section.module.css";
+import React, { FC } from 'react';
+import styles from './Section.module.css';
 
 interface ISection {
   children: React.ReactNode;

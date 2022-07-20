@@ -1,8 +1,8 @@
-import React, { FC } from "react";
-import Categories from "../Categories";
-import RecentPosts from "../RecentPosts";
-import SideBar from "../SideBar";
-import styles from "./Toolbar.module.css";
+import React, { FC } from 'react';
+import Categories from '../Categories';
+import RecentPosts from '../RecentPosts';
+import SideBar from '../SideBar';
+import styles from './Toolbar.module.css';
 
 interface IToolbar {
   recentPosts: any;

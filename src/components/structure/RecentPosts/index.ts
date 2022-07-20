@@ -1,2 +1,2 @@
-import RecentPosts from "./RecentPosts";
-export default RecentPosts
+import RecentPosts from './RecentPosts';
+export default RecentPosts;

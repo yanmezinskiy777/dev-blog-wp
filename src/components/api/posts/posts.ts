@@ -1,5 +1,5 @@
-import { IPost } from "../../structure/PostCard/PostCardItem/types";
-import { getApolloClient } from "../apolloClient";
+import { IPost } from '../../structure/PostCard/PostCardItem/types';
+import { getApolloClient } from '../apolloClient';
 import {
   QUERY_ALL_POSTS,
   QUERY_ALL_POSTS_ARCHIVE,
@@ -10,12 +10,8 @@ import {
   QUERY_POST_BY_SLUG,
   QUERY_POST_PER_PAGE,
   QUERY_POST_SEO_BY_SLUG,
-} from "./query";
-import {
-  IGetPostsByCategoryId,
-  IOptionsGetAllPosts,
-  IPaginatePosts,
-} from "./types";
+} from './query';
+import { IGetPostsByCategoryId, IOptionsGetAllPosts, IPaginatePosts } from './types';
 
 const postsByCategoryIdIncludesTypes = {
   all: QUERY_POSTS_BY_CATEGORY_ID,
@@ -23,11 +19,8 @@ const postsByCategoryIdIncludesTypes = {
   index: QUERY_POSTS_BY_CATEGORY_ID_INDEX,
 };
 
-export async function getPostsByCategoryId({
-  categoryId,
-  options,
-}: IGetPostsByCategoryId) {
-  const { queryIncludes = "index" } = options;
+export async function getPostsByCategoryId({ categoryId, options }: IGetPostsByCategoryId) {
+  const { queryIncludes = 'index' } = options;
 
   const apolloClient = getApolloClient();
 
@@ -41,9 +34,7 @@ export async function getPostsByCategoryId({
       },
     });
   } catch (e: any) {
-    console.log(
-      `[posts][getPostsByCategoryId] Failed to query post data: ${e.message}`
-    );
+    console.log(`[posts][getPostsByCategoryId] Failed to query post data: ${e.message}`);
     throw e;
   }
 
@@ -62,7 +53,7 @@ export function updateUserAvatar(avatar: any) {
 
   return {
     ...avatar,
-    url: avatar.url?.replace("http://", "https://"),
+    url: avatar.url?.replace('http://', 'https://'),
   };
 }
 
@@ -121,9 +112,7 @@ export async function getAllPosts(options: IOptionsGetAllPosts) {
   const posts = data.data.posts.edges.map(({ node }: any) => node);
 
   return {
-    posts: Array.isArray(posts)
-      ? posts.map((post) => normalizationPost(post))
-      : [],
+    posts: Array.isArray(posts) ? posts.map((post) => normalizationPost(post)) : [],
   };
 }
 
@@ -131,28 +120,21 @@ export async function getRecentPosts(count: number = 3) {
   const apolloClient = getApolloClient();
 
   const data = await apolloClient.query({
-    query: allPostsIncludesTypes["all"],
+    query: allPostsIncludesTypes['all'],
   });
-  const posts = data.data.posts.edges
-    .map(({ node }: any) => node)
-    .splice(0, count);
+  const posts = data.data.posts.edges.map(({ node }: any) => node).splice(0, count);
   return {
-    posts: Array.isArray(posts)
-      ? posts.map((post) => normalizationPost(post))
-      : [],
+    posts: Array.isArray(posts) ? posts.map((post) => normalizationPost(post)) : [],
   };
 }
 
-export async function getPaginatedPosts({
-  currentPage = 1,
-  options,
-}: IPaginatePosts) {
+export async function getPaginatedPosts({ currentPage = 1, options }: IPaginatePosts) {
   const { posts }: { posts: IPost[] } = await getAllPosts(options);
   const postsPerPage = await getPostsPerPage();
   const pagesCount = await getPagesCount(posts, postsPerPage);
 
   let page = Number(currentPage);
-  if (typeof page === "undefined" || isNaN(page) || page > pagesCount) {
+  if (typeof page === 'undefined' || isNaN(page) || page > pagesCount) {
     page = 1;
   }
   const offset = postsPerPage * (page - 1);
@@ -214,9 +196,7 @@ export async function getPostBySlug(slug?: string | string[]) {
       },
     });
   } catch (e: any) {
-    console.log(
-      `[posts][getPostBySlug] Failed to query post data: ${e.message}`
-    );
+    console.log(`[posts][getPostBySlug] Failed to query post data: ${e.message}`);
     throw e;
   }
 
@@ -234,12 +214,8 @@ export async function getPostBySlug(slug?: string | string[]) {
         },
       });
     } catch (e: any) {
-      console.log(
-        `[posts][getPostBySlug] Failed to query SEO plugin: ${e.message}`
-      );
-      console.log(
-        "Is the SEO Plugin installed? If not, disable WORDPRESS_PLUGIN_SEO in next.config.js."
-      );
+      console.log(`[posts][getPostBySlug] Failed to query SEO plugin: ${e.message}`);
+      console.log('Is the SEO Plugin installed? If not, disable WORDPRESS_PLUGIN_SEO in next.config.js.');
       throw e;
     }
 

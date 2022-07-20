@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import styles from "./Container.module.css";
+import React, { FC } from 'react';
+import styles from './Container.module.css';
 
 interface IContainer {
   children: React.ReactNode;

@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import styles from "./Title.module.css";
+import React, { FC } from 'react';
+import styles from './Title.module.css';
 
 interface ITitle {
   title: string;

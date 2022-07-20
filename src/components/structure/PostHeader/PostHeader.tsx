@@ -1,16 +1,12 @@
-import React, { FC } from 'react'
-import styles from "./PostHeader.module.css"
+import React, { FC } from 'react';
+import styles from './PostHeader.module.css';
 
 interface IPostHeader {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const PostHeader: FC<IPostHeader> = ({ children }) => {
-  return (
-    <header className={styles.PostHeader}>
-        {children}
-    </header>
-  )
-}
+  return <header className={styles.PostHeader}>{children}</header>;
+};
 
-export default PostHeader
+export default PostHeader;

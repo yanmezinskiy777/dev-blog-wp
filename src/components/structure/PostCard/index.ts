@@ -1,2 +1,2 @@
-import PostCard from "./PostCardItem/PostCard";
+import PostCard from './PostCardItem/PostCard';
 export default PostCard;

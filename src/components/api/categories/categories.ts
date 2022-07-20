@@ -2,12 +2,8 @@
  * getAllCategories
  */
 
-import { getApolloClient } from "../apolloClient";
-import {
-  QUERY_ALL_CATEGORIES,
-  QUERY_CATEGORY_BY_SLUG,
-  QUERY_CATEGORY_SEO_BY_SLUG,
-} from "./query";
+import { getApolloClient } from '../apolloClient';
+import { QUERY_ALL_CATEGORIES, QUERY_CATEGORY_BY_SLUG, QUERY_CATEGORY_SEO_BY_SLUG } from './query';
 
 export async function getAllCategories() {
   const apolloClient = getApolloClient();
@@ -42,9 +38,7 @@ export async function getCategoryBySlug(slug?: string[] | string) {
       },
     });
   } catch (e: any) {
-    console.log(
-      `[categories][getCategoryBySlug] Failed to query category data: ${e.message}`
-    );
+    console.log(`[categories][getCategoryBySlug] Failed to query category data: ${e.message}`);
     throw e;
   }
 
@@ -62,12 +56,8 @@ export async function getCategoryBySlug(slug?: string[] | string) {
         },
       });
     } catch (e: any) {
-      console.log(
-        `[categories][getCategoryBySlug] Failed to query SEO plugin: ${e.message}`
-      );
-      console.log(
-        "Is the SEO Plugin installed? If not, disable WORDPRESS_PLUGIN_SEO in next.config.js."
-      );
+      console.log(`[categories][getCategoryBySlug] Failed to query SEO plugin: ${e.message}`);
+      console.log('Is the SEO Plugin installed? If not, disable WORDPRESS_PLUGIN_SEO in next.config.js.');
       throw e;
     }
 

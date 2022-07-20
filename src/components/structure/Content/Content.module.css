@@ -34,3 +34,8 @@
   word-wrap: break-word;
   margin-bottom: 2rem;
 }
+
+.Content figure {
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}

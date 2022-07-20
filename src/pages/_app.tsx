@@ -1,15 +1,15 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import NextApp from "next/app";
-import NextNProgress from "nextjs-progressbar";
-import { AppContext, useAppContext } from "../components/hooks/useApp";
-import { getSiteMetadata } from "../components/api/metadata/metadata";
-import { ISettingsMetadata } from "../components/api/metadata/types";
-import { ApolloProvider } from "@apollo/client";
-import useApolloClient from "../components/hooks/useApolloClient";
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import NextApp from 'next/app';
+import NextNProgress from 'nextjs-progressbar';
+import { AppContext, useAppContext } from '../components/hooks/useApp';
+import { getSiteMetadata } from '../components/api/metadata/metadata';
+import { ISettingsMetadata } from '../components/api/metadata/types';
+import { ApolloProvider } from '@apollo/client';
+import useApolloClient from '../components/hooks/useApolloClient';
 
 type MyApp = AppProps & SiteProps;
-export type SiteProps = { metadata: ISettingsMetadata }
+export type SiteProps = { metadata: ISettingsMetadata };
 
 function MyApp({ Component, pageProps, metadata }: MyApp) {
   const apolloClient = useApolloClient(pageProps.initialApolloState);
