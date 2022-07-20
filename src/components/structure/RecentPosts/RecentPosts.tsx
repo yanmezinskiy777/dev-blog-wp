@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { FC } from "react";
 import { formatDate } from "../../../utils/baseUtils";
 import { getPostLink } from "../../../utils/posts";
-import { IPost } from "../../posts/types";
+import { IPost } from "../PostCard/PostCardItem/types";
 import styles from "./RecentPosts.module.css";
 
 interface IRecientPost {

@@ -1,9 +1,10 @@
 import React, { FC } from "react";
+import { Metadata } from "../../"
 import { IPost } from "./types";
 import styles from "./PostCard.module.css";
-import Button from "../ui/button";
-import Metadata from "../metadata";
-import { getPostLink } from "../../utils/posts";
+import Button from "../../../ui/button";
+import { getPostLink } from "../../../../utils/posts";
+
 
 const PostCard: FC<{ post: IPost }> = ({ post }) => {
   const { featuredImage, title, excerpt, slug, author, date, categories } =

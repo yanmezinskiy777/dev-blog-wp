@@ -2,6 +2,6 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: min-content;
   grid-row-gap: 2rem;
 }

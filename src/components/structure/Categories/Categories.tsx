@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { FC } from "react";
 import { categoryPathBySlug } from "../../../utils/categories";
-import { ICategories } from "../../posts/types";
+import { ICategories } from "../PostCard/PostCardItem/types";
 import styles from "./Categories.module.css";
 
 interface ICategoriesProps {

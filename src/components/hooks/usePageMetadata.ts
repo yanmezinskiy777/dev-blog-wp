@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { AppContext } from "./useApp";
 import { constructPageMetadata } from "../../utils/metadata/metadata";
-import { IPost } from "../posts/types";
+import { IPost } from "../structure/PostCard/PostCardItem/types";
 
 export default function usePageMetadata({
   metadata: pageMetadata,

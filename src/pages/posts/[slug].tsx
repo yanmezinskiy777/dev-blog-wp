@@ -8,8 +8,8 @@ import {
   getRecentPosts,
 } from "../../components/api/posts/posts";
 import useApp from "../../components/hooks/useApp";
-import Metadata from "../../components/metadata";
-import { IPost } from "../../components/posts/types";
+import Metadata from "../../components/structure/Metadata";
+import { IPost } from "../../components/structure/PostCard/PostCardItem/types";
 import Content from "../../components/structure/Content";
 import Layout from "../../components/structure/Layout";
 import PostHeader from "../../components/structure/PostHeader";
@@ -40,7 +40,7 @@ const Posts = ({ post, recentPosts, categories: allCategories }: IPostPage) => {
     featuredImage,
     isSticky = false,
   } = post;
-  console.log(post);
+  
   const { metadata: siteMetadata } = useApp();
 
   //post.og.imageUrl = `${homepage}${socialImage}`;

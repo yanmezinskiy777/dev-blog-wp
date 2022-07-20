@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React, { FC } from "react";
-import { formatDate } from "../../utils/baseUtils";
-import { categoryPathBySlug } from "../../utils/categories";
-import { authorPathByName } from "../../utils/users";
-import { IAuthor, ICategories } from "../posts/types";
+import { formatDate } from "../../../utils/baseUtils";
+import { categoryPathBySlug } from "../../../utils/categories";
+import { authorPathByName } from "../../../utils/users";
+import { IAuthor, ICategories } from "../PostCard/PostCardItem/types";
 import styles from "./Metadata.module.css";
 
 const DEFAULT_METADATA_OPTIONS = {
@@ -15,7 +15,7 @@ export interface IMetadata {
   author: IAuthor;
   date: string;
   categories: ICategories[];
-  type: "center" | "left";
+  type?: "center" | "left";
   options?: {
     compactCategories: boolean;
   };
@@ -29,7 +29,10 @@ const Metadata: FC<IMetadata> = ({
   type = "center",
 }) => {
   const { compactCategories } = options;
-  const metaDataClass = type === "center" ? [styles.metadata, styles.center] : [styles.metadata, styles.left];
+  const metaDataClass =
+    type === "center"
+      ? [styles.metadata, styles.center]
+      : [styles.metadata, styles.left];
   return (
     <ul className={metaDataClass.join(" ")}>
       {author && (
@@ -44,11 +47,12 @@ const Metadata: FC<IMetadata> = ({
                 className={styles.ava}
               />
             )}
-            <Link href={authorPathByName(author.name)}>
+            {/* <Link href={authorPathByName(author.name)}>
               <a rel="author" className={styles.username}>
                 {author.name}
               </a>
-            </Link>
+            </Link> */}
+            <p className={styles.username}>{author.name}</p>
           </address>
         </li>
       )}

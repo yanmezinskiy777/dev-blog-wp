@@ -1,5 +1,5 @@
 import { ISettingsMetadata } from "../../components/api/metadata/types";
-import { IArticle, IOg, IPost } from "../../components/posts/types";
+import { IArticle, IOg, IPost } from "../../components/structure/PostCard/PostCardItem/types";
 import { removeExtraSpaces } from "../baseUtils";
 import { IOptions, IOptionsConstruct, ISettings } from "./types";
 

@@ -1,0 +1,13 @@
+.title {
+  color: white;
+  text-align: center;
+}
+.title h1 {
+  font-size: 2rem;
+  margin: 0;
+  margin-bottom: 2rem;
+}
+.title p {
+  margin: 0;
+  margin-bottom: 2rem;
+}

@@ -1,4 +1,4 @@
-import { IPost } from "../../posts/types";
+import { IPost } from "../../structure/PostCard/PostCardItem/types";
 import { getApolloClient } from "../apolloClient";
 import {
   QUERY_ALL_POSTS,

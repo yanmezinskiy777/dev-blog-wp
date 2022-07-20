@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import { GrPrevious as PreviousIcon, GrNext as NextIcon } from 'react-icons/gr';
-import { HiOutlineDotsHorizontal as Dots } from 'react-icons/hi';
+import { GrPrevious as PreviousIcon, GrNext as NextIcon } from "react-icons/gr";
+
+import { HiOutlineDotsHorizontal as Dots } from "react-icons/hi";
 import styles from "./Pagination.module.css";
 
 export interface IPagination {
@@ -67,11 +68,15 @@ const Pagination: FC<IPagination> = ({
         )}
       </Helmet>
 
-      <nav className={styles.nav} role="navigation" aria-label="Pagination Navigation">
+      <nav
+        className={styles.nav}
+        role="navigation"
+        aria-label="Pagination Navigation"
+      >
         {hasPrevPage && (
           <Link href={`${path}${currentPage - 1}`}>
             <a className={styles.prev} aria-label="Goto Previous Page">
-              <PreviousIcon /> Previous
+              <PreviousIcon className={styles.arrow} />
             </a>
           </Link>
         )}
@@ -79,14 +84,22 @@ const Pagination: FC<IPagination> = ({
         <ul className={styles.pages}>
           {hasPrevDots && (
             <li className={styles.dots}>
-              <Dots aria-label={`Navigation to pages 1-${pages[0] - 1} hidden`} />
+              <Dots
+                className={styles.arrow}
+                color="white"
+                aria-label={`Navigation to pages 1-${pages[0] - 1} hidden`}
+              />
             </li>
           )}
           {pages.map((page) => {
             const active = page === currentPage;
             return active ? (
               <li key={page}>
-                <span className={styles.active} aria-label={`Current Page, Page ${page}`} aria-current="true">
+                <span
+                  className={styles.active}
+                  aria-label={`Current Page, Page ${page}`}
+                  aria-current="true"
+                >
                   {page}
                 </span>
               </li>
@@ -102,7 +115,11 @@ const Pagination: FC<IPagination> = ({
           })}
           {hasNextDots && (
             <li className={styles.dots}>
-              <Dots aria-label={`Navigation to pages ${pages[pages.length - 1] + 1}-${pagesCount} hidden`} />
+              <Dots
+                aria-label={`Navigation to pages ${
+                  pages[pages.length - 1] + 1
+                }-${pagesCount} hidden`}
+              />
             </li>
           )}
         </ul>
@@ -110,7 +127,7 @@ const Pagination: FC<IPagination> = ({
         {hasNextPage && (
           <Link href={`${path}${currentPage + 1}`}>
             <a className={styles.next} aria-label="Goto Next Page">
-              Next <NextIcon />
+              <NextIcon className={styles.arrow} />
             </a>
           </Link>
         )}

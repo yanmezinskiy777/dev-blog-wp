@@ -9,6 +9,7 @@ import {
   getRecentPosts,
 } from "../../components/api/posts/posts";
 import usePageMetadata from "../../components/hooks/usePageMetadata";
+import { Title } from "../../components/structure";
 import Template from "../../components/templates/Template";
 
 interface IPagePosts {
@@ -32,7 +33,7 @@ export default function Categories({
       description:
         description ||
         category.og?.description ||
-        `Read ${posts.length} posts from ${name}`,
+        `Постов в категории ${name}: ${posts.length}`,
     },
   });
 
@@ -43,13 +44,13 @@ export default function Categories({
       metadata={metadata as any}
       recentPosts={recentPosts}
       categories={categories}
+      TitleComponent={<Title title={name} numberOfPosts={posts.length} />}
     />
   );
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { category } = await getCategoryBySlug(params?.slug);
-
   const { posts } = await getPostsByCategoryId({
     categoryId: category.databaseId,
     options: { queryIncludes: "archive" },

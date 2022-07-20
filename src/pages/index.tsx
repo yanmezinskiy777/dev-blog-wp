@@ -3,8 +3,8 @@ import {
   getPaginatedPosts,
   getRecentPosts,
 } from "../components/api/posts/posts";
-import PostCard from "../components/posts/PostCard";
-import { ICategories, IPost } from "../components/posts/types";
+import { PostCard } from "../components/structure/";
+import { ICategories, IPost } from "../components/structure/PostCard/PostCardItem/types";
 import Layout from "../components/structure/Layout";
 import Section from "../components/structure/Section";
 import Paginataion from "../components/structure/Pagination";
@@ -26,10 +26,6 @@ const Home: NextPage<IHome> = ({
   categories,
   recentPosts,
 }) => {
-  console.log(posts);
-  console.log(pagination);
-  console.log(categories);
-  console.log(recentPosts);
   return (
     <Layout>
       <Section>
