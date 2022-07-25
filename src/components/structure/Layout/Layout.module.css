@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: auto;
   padding: 3% 10%;
   min-height: 100vh;
   background: rgb(18, 11, 138);
@@ -10,4 +10,26 @@
     rgba(9, 9, 121, 1) 52%,
     rgba(15, 119, 140, 1) 100%
   );
+}
+
+@media (max-width: 1500px){
+  .container{
+    padding: 3% 3%;
+  }
+}
+
+@media (max-width: 1000px){
+  .container{
+    padding: 3% 5%;
+  }
+}
+@media (max-width: 800px){
+  .container{
+    padding: 3% 8%;
+  }
+}
+@media (max-width: 500px) {
+  .container{
+    padding: 1.5rem 1.5rem;
+  }
 }

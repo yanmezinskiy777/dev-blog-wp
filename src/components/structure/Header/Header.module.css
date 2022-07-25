@@ -11,4 +11,21 @@
   color: white;
   text-decoration: none;
   cursor: pointer;
+  transition: color cubic-bezier(0.075, 0.82, 0.165, 1) 200ms;
+}
+.logo:hover {
+  color: #0d6efd;
+}
+@media (max-width: 1000px) {
+  .logo {
+    font-size: 30px;
+  }
+}
+@media (max-width: 500px) {
+  .logo {
+    font-size: 20px;
+  }
+  .container {
+    height: 70px;
+  }
 }

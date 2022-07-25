@@ -50,3 +50,9 @@
   align-self: flex-end;
   margin: 0 0.2rem -0.2rem 0.2rem;
 }
+
+@media (max-width: 800px) {
+  .nav {
+    margin-top: 3em;
+  }
+}

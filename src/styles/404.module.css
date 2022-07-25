@@ -1,0 +1,18 @@
+.error {
+  color: white;
+  text-align: center;
+}
+.error h1 {
+  margin: 0;
+  margin-bottom: 2rem;
+}
+.error span {
+  margin: 0;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.error p{
+    margin: 0;
+    font-size: 1.5rem;
+}

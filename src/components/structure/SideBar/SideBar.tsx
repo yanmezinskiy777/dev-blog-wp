@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import styles from './SideBar.module.css';
+import React, { FC } from "react";
+import styles from "./SideBar.module.css";
 
 interface ISideBar {
   children: React.ReactNode;

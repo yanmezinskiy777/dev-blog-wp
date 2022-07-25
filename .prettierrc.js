@@ -1,6 +1,6 @@
 module.exports = {
-    singleQuote: true,
-    printWidth: 120,
+    singleQuote: false,
+    printWidth: 80,
     overrides: [
       {
         files: '*.css',

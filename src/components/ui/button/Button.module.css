@@ -15,4 +15,10 @@
   .button:hover {
     transform: translateY(-4px);
   }
+  @media (max-width: 600px) {
+    .button {
+      padding: 0.7rem 0.9rem;
+      font-size: 0.9rem;
+    }
+  }
   

@@ -1,19 +1,20 @@
-import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
-import { helmetSettingsFromMetadata } from '../../utils/metadata/metadata';
-import { ISettingsMetadata } from '../api/metadata/types';
-import useApp from '../hooks/useApp';
-import { IPost } from '../structure/PostCard/PostCardItem/types';
-import Layout from '../structure/Layout';
-import { IPagination } from '../structure/Pagination/Pagination';
-import styles from '../../styles/Home.module.css';
-import Section from '../structure/Section';
-import { PostCard } from '../structure/';
-import Paginataion from '../structure/Pagination';
-import Toolbar from '../structure/Toolbar';
-import Container from '../structure/Container';
+import React, { FC } from "react";
+import { Helmet } from "react-helmet";
+import { helmetSettingsFromMetadata } from "../../utils/metadata/metadata";
+import { ISettingsMetadata } from "../api/metadata/types";
+import useApp from "../hooks/useApp";
+import { IPost } from "../structure/PostCard/PostCardItem/types";
+import Layout from "../structure/Layout";
+import { IPagination } from "../structure/Pagination/Pagination";
+import styles from "../../styles/Home.module.css";
+import Section from "../structure/Section";
+import { PostCard } from "../structure/";
+import Paginataion from "../structure/Pagination";
+import Toolbar from "../structure/Toolbar";
+import Container from "../structure/Container";
 
 interface ITemplate {
+  // eslint-disable-next-line no-undef
   TitleComponent?: JSX.Element;
   title?: string;
   posts: IPost[];
@@ -27,7 +28,7 @@ interface ITemplate {
 const Template: FC<ITemplate> = ({
   title,
   posts,
-  slug,
+  //slug,
   pagination,
   metadata,
   recentPosts,

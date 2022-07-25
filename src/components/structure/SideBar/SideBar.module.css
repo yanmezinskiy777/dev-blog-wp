@@ -19,3 +19,16 @@
 .sidebar hr {
   margin-bottom: 2rem;
 }
+
+@media (max-width: 500px) {
+  .sidebar {
+    padding: 1.5rem;
+  }
+  .sidebar h3 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  .sidebar hr {
+    margin-bottom: 1.5rem;
+  }
+}

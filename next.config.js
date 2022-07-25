@@ -25,7 +25,7 @@ module.exports = withPlugins([[feed], [sitemap]], {
     // and available at /images/og. If changing, make sure to update the .gitignore
 
     OG_IMAGE_DIRECTORY: "/images/og",
-    trailingSlash: true
+    trailingSlash: true,
   },
   i18n: {
     locales: ["ru"],

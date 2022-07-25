@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { getApolloClient } from '../api/apolloClient';
+import { useMemo } from "react";
+import { getApolloClient } from "../api/apolloClient";
 
 let apolloClient: any;
 
@@ -22,7 +22,7 @@ export function initializeApollo(initialState: any) {
 
   // For SSG and SSR always create a new Apollo Client
 
-  if (typeof window === 'undefined') return _apolloClient;
+  if (typeof window === "undefined") return _apolloClient;
 
   // Create the Apollo Client once in the client
 

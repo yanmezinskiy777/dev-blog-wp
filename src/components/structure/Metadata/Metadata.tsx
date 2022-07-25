@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link';
-import React, { FC } from 'react';
-import { formatDate } from '../../../utils/baseUtils';
-import { categoryPathBySlug } from '../../../utils/categories';
-import { authorPathByName } from '../../../utils/users';
-import { IAuthor, ICategories } from '../PostCard/PostCardItem/types';
-import styles from './Metadata.module.css';
+import Link from "next/link";
+import React, { FC } from "react";
+import { formatDate } from "../../../utils/baseUtils";
+import { categoryPathBySlug } from "../../../utils/categories";
+import { IAuthor, ICategories } from "../PostCard/PostCardItem/types";
+import styles from "./Metadata.module.css";
 
 const DEFAULT_METADATA_OPTIONS = {
   compactCategories: true,
@@ -15,17 +14,26 @@ export interface IMetadata {
   author: IAuthor;
   date: string;
   categories: ICategories[];
-  type?: 'center' | 'left';
+  type?: "center" | "left";
   options?: {
     compactCategories: boolean;
   };
 }
 
-const Metadata: FC<IMetadata> = ({ author, date, categories, options = DEFAULT_METADATA_OPTIONS, type = 'center' }) => {
+const Metadata: FC<IMetadata> = ({
+  author,
+  date,
+  categories,
+  options = DEFAULT_METADATA_OPTIONS,
+  type = "center",
+}) => {
   const { compactCategories } = options;
-  const metaDataClass = type === 'center' ? [styles.metadata, styles.center] : [styles.metadata, styles.left];
+  const metaDataClass =
+    type === "center"
+      ? [styles.metadata, styles.center]
+      : [styles.metadata, styles.left];
   return (
-    <ul className={metaDataClass.join(' ')}>
+    <ul className={metaDataClass.join(" ")}>
       {author && (
         <li className={styles.avatar}>
           <address>
@@ -55,11 +63,11 @@ const Metadata: FC<IMetadata> = ({ author, date, categories, options = DEFAULT_M
       {Array.isArray(categories) && categories[0] && (
         <li className={styles.categories}>
           {compactCategories && (
-            <p title={categories.map(({ name }) => name).join(', ')}>
+            <p title={categories.map(({ name }) => name).join(", ")}>
               <Link href={categoryPathBySlug(categories[0].slug)}>
                 <a>{categories[0].name}</a>
               </Link>
-              {categories.length > 1 && ' and more'}
+              {categories.length > 1 && " and more"}
             </p>
           )}
           {!compactCategories && (

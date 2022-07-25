@@ -34,3 +34,15 @@
   font-size: 1rem;
   font-weight: inherit;
 }
+@media (max-width: 450px) {
+  .content time {
+    font-size: 0.8rem;
+  }
+  .content p {
+    font-size: 0.8rem;
+  }
+  .image img {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+}

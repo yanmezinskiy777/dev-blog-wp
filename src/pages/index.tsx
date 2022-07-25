@@ -1,23 +1,34 @@
-import type { NextPage } from 'next';
-import { getPaginatedPosts, getRecentPosts } from '../components/api/posts/posts';
-import { PostCard } from '../components/structure/';
-import { ICategories, IPost } from '../components/structure/PostCard/PostCardItem/types';
-import Layout from '../components/structure/Layout';
-import Section from '../components/structure/Section';
-import Paginataion from '../components/structure/Pagination';
-import styles from '../styles/Home.module.css';
-import { getAllCategories } from '../components/api/categories/categories';
-import Toolbar from '../components/structure/Toolbar';
-import Container from '../components/structure/Container';
+import type { NextPage } from "next";
+import {
+  getPaginatedPosts,
+  getRecentPosts,
+} from "../components/api/posts/posts";
+import { PostCard } from "../components/structure/";
+import {
+  ICategories,
+  IPost,
+} from "../components/structure/PostCard/PostCardItem/types";
+import Layout from "../components/structure/Layout";
+import Section from "../components/structure/Section";
+import Paginataion from "../components/structure/Pagination";
+import styles from "../styles/Home.module.css";
+import { getAllCategories } from "../components/api/categories/categories";
+import Toolbar from "../components/structure/Toolbar";
+import Container from "../components/structure/Container";
 
 interface IHome {
-  posts: any;
+  posts: IPost[];
   pagination: any;
   categories: ICategories[];
-  recentPosts: any;
+  recentPosts: IPost[];
 }
 
-const Home: NextPage<IHome> = ({ posts, pagination, categories, recentPosts }) => {
+const Home: NextPage<IHome> = ({
+  posts,
+  pagination,
+  categories,
+  recentPosts,
+}) => {
   return (
     <Layout>
       <Section>
@@ -47,7 +58,7 @@ const Home: NextPage<IHome> = ({ posts, pagination, categories, recentPosts }) =
 export async function getStaticProps() {
   const { posts, pagination } = await getPaginatedPosts({
     currentPage: 1,
-    options: { queryIncludes: 'archive' },
+    options: { queryIncludes: "archive" },
   });
 
   const { posts: recentPosts } = await getRecentPosts(3);
@@ -61,7 +72,7 @@ export async function getStaticProps() {
       posts,
       pagination: {
         ...pagination,
-        basePath: '/posts',
+        basePath: "/posts",
       },
     },
   };
