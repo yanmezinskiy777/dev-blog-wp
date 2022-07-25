@@ -19,10 +19,15 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 ## Enviroment variables
 ### DEV
 .env.local
-WORDPRESS_GRAPHQL_ENDPOINT=http://localhost:8000/dev/graphql
-WORDPRESS_PLUGIN_SEO=true
-POSTS_PER_PAGE=8
-HOME_PAGE=http://localhost:3000
+
+WORDPRESS_GRAPHQL_ENDPOINT=wordpress_url
+
+WORDPRESS_PLUGIN_SEO=boolean
+
+POSTS_PER_PAGE=number
+
+HOME_PAGE=home_page
+
 
 
 
