@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import styles from './PostHeader.module.css';
+import React, { FC } from "react";
+import styles from "./PostHeader.module.css";
 
 interface IPostHeader {
   children: React.ReactNode;

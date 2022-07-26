@@ -1,5 +1,9 @@
 import { ISettingsMetadata } from "../../components/api/metadata/types";
-import { IArticle, IOg, IPost } from "../../components/structure/PostCard/PostCardItem/types";
+import {
+  IArticle,
+  IOg,
+  IPost,
+} from "../../components/structure/PostCard/PostCardItem/types";
 import { removeExtraSpaces } from "../baseUtils";
 import { IOptions, IOptionsConstruct, ISettings } from "./types";
 
@@ -205,7 +209,12 @@ export function constructPageMetadata(
   // Article Properties
   // Loop through article properties that rely on a non-object value
 
-  if (pageMetadata && pageMetadata.hasOwnProperty("og") && pageMetadata.og!.type === "article" && pageMetadata.article) {
+  if (
+    pageMetadata &&
+    pageMetadata.hasOwnProperty("og") &&
+    pageMetadata.og!.type === "article" &&
+    pageMetadata.article
+  ) {
     const articleProperties: string[] = [
       "author",
       "modifiedTime",

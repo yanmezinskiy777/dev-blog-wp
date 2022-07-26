@@ -1,8 +1,8 @@
-const fs = require('fs');
-const he = require('he');
-const { gql, ApolloClient, InMemoryCache } = require('@apollo/client');
-const RSS = require('rss');
-const prettier = require('prettier');
+const fs = require("fs");
+const he = require("he");
+const { gql, ApolloClient, InMemoryCache } = require("@apollo/client");
+const RSS = require("rss");
+const prettier = require("prettier");
 
 const config = { homepage: process.env.HOME_PAGE };
 
@@ -15,7 +15,8 @@ async function createFile(file, process, directory, location, verbose = false) {
     mkdirp(directory);
     verbose && console.log(`[${process}] Created directory ${directory}`);
     await promiseToWriteFile(location, file);
-    verbose && console.log(`[${process}] Successfully wrote file to ${location}`);
+    verbose &&
+      console.log(`[${process}] Successfully wrote file to ${location}`);
   } catch (e) {
     throw new Error(`[${process}] Failed to create file: ${e.message}`);
   }
@@ -42,8 +43,8 @@ function promiseToWriteFile(location, content) {
  */
 
 function mkdirp(directory) {
-  const split = directory.split('/');
-  let temp = '.';
+  const split = directory.split("/");
+  let temp = ".";
 
   split.forEach((dir) => {
     temp = `${temp}/${dir}`;
@@ -119,18 +120,23 @@ async function getAllPosts(apolloClient, process, verbose = false) {
       if (data.excerpt) {
         //Sanitize the excerpt by removing all HTML tags
         const regExHtmlTags = /(<([^>]+)>)/g;
-        data.excerpt = data.excerpt.replace(regExHtmlTags, '');
+        data.excerpt = data.excerpt.replace(regExHtmlTags, "");
       }
 
       return data;
     });
 
-    verbose && console.log(`[${process}] Successfully fetched posts from ${apolloClient.link.options.uri}`);
+    verbose &&
+      console.log(
+        `[${process}] Successfully fetched posts from ${apolloClient.link.options.uri}`
+      );
     return {
       posts,
     };
   } catch (e) {
-    throw new Error(`[${process}] Failed to fetch posts from ${apolloClient.link.options.uri}: ${e.message}`);
+    throw new Error(
+      `[${process}] Failed to fetch posts from ${apolloClient.link.options.uri}: ${e.message}`
+    );
   }
 }
 
@@ -155,18 +161,23 @@ async function getSiteMetadata(apolloClient, process, verbose = false) {
     const data = await apolloClient.query({ query });
     metadata = { ...data.data.generalSettings };
 
-    if (!metadata.language || metadata.language === '') {
-      metadata.language = 'en';
+    if (!metadata.language || metadata.language === "") {
+      metadata.language = "en";
     } else {
-      metadata.language = metadata.language.split('_')[0];
+      metadata.language = metadata.language.split("_")[0];
     }
 
-    verbose && console.log(`[${process}] Successfully fetched metadata from ${apolloClient.link.options.uri}`);
+    verbose &&
+      console.log(
+        `[${process}] Successfully fetched metadata from ${apolloClient.link.options.uri}`
+      );
     return {
       metadata,
     };
   } catch (e) {
-    throw new Error(`[${process}] Failed to fetch metadata from ${apolloClient.link.options.uri}: ${e.message}`);
+    throw new Error(
+      `[${process}] Failed to fetch metadata from ${apolloClient.link.options.uri}: ${e.message}`
+    );
   }
 }
 
@@ -201,12 +212,17 @@ async function getPages(apolloClient, process, verbose = false) {
       }),
     ];
 
-    verbose && console.log(`[${process}] Successfully fetched page slugs from ${apolloClient.link.options.uri}`);
+    verbose &&
+      console.log(
+        `[${process}] Successfully fetched page slugs from ${apolloClient.link.options.uri}`
+      );
     return {
       pages,
     };
   } catch (e) {
-    throw new Error(`[${process}] Failed to fetch page slugs from ${apolloClient.link.options.uri}: ${e.message}`);
+    throw new Error(
+      `[${process}] Failed to fetch page slugs from ${apolloClient.link.options.uri}: ${e.message}`
+    );
   }
 }
 
@@ -243,10 +259,10 @@ async function getSitemapData(apolloClient, process, verbose = false) {
  */
 
 function generateFeed({ posts = [], metadata = {} }) {
-  const { homepage = '' } = config;
+  const { homepage = "" } = config;
 
   const feed = new RSS({
-    title: metadata.title || '',
+    title: metadata.title || "",
     description: metadata.description,
     site_url: homepage,
     feed_url: `${homepage}/feed.xml`,
@@ -302,7 +318,7 @@ function generateIndexSearch({ posts }) {
  */
 
 function generateSitemap({ posts = [], pages = [] }, nextConfig = {}) {
-  const { homepage = '' } = config;
+  const { homepage = "" } = config;
   const { trailingSlash } = nextConfig;
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -314,28 +330,36 @@ function generateSitemap({ posts = [], pages = [] }, nextConfig = {}) {
         ${pages
           .map((page) => {
             return `<url>
-                      <loc>${homepage}/${page.slug}${trailingSlash ? '/' : ''}</loc>
+                      <loc>${homepage}/${page.slug}${
+              trailingSlash ? "/" : ""
+            }</loc>
                       <priority>0.3</priority>
-                      <lastmod>${new Date(page.modified).toISOString()}</lastmod>
+                      <lastmod>${new Date(
+                        page.modified
+                      ).toISOString()}</lastmod>
                     </url>
                 `;
           })
-          .join('')}
+          .join("")}
           ${posts
             .map((post) => {
               return `<url>
-                        <loc>${homepage}/posts/${post.slug}${trailingSlash ? '/' : ''}</loc>
-                        <lastmod>${new Date(post.modified).toISOString()}</lastmod>
+                        <loc>${homepage}/posts/${post.slug}${
+                trailingSlash ? "/" : ""
+              }</loc>
+                        <lastmod>${new Date(
+                          post.modified
+                        ).toISOString()}</lastmod>
                       </url>
                   `;
             })
-            .join('')}
+            .join("")}
     </urlset>
     `;
 
   const sitemapFormatted = prettier.format(sitemap, {
     printWidth: 120,
-    parser: 'html',
+    parser: "html",
   });
 
   return sitemapFormatted;
@@ -346,20 +370,23 @@ function generateSitemap({ posts = [], pages = [] }, nextConfig = {}) {
  */
 
 async function generateRobotsTxt({ outputDirectory, outputName }) {
-  const { homepage = '' } = config;
+  const { homepage = "" } = config;
 
   try {
     // Build sitemap URL at root directory
     let sitemapUrl = new URL(outputName, homepage);
 
     // Check if output directory is not root directory
-    if (outputDirectory !== './public') {
+    if (outputDirectory !== "./public") {
       // Check if output directory is within './public' folder
-      if (outputDirectory.startsWith('./public')) {
+      if (outputDirectory.startsWith("./public")) {
         // Update sitemap URL with new directory
-        sitemapUrl.pathname = resolvePublicPathname(outputDirectory, outputName);
+        sitemapUrl.pathname = resolvePublicPathname(
+          outputDirectory,
+          outputName
+        );
       } else {
-        throw new Error('Sitemap should be within ./public folder.');
+        throw new Error("Sitemap should be within ./public folder.");
       }
     }
 
@@ -367,7 +394,7 @@ async function generateRobotsTxt({ outputDirectory, outputName }) {
     const robots = `User-agent: *\nSitemap: ${sitemapUrl}`;
 
     // Create robots.txt always at root directory
-    await createFile(robots, 'Robots.txt', './public', './public/robots.txt');
+    await createFile(robots, "Robots.txt", "./public", "./public/robots.txt");
   } catch (e) {
     throw new Error(`[Robots.txt] Failed to create robots.txt: ${e.message}`);
   }
@@ -378,8 +405,8 @@ async function generateRobotsTxt({ outputDirectory, outputName }) {
  */
 
 function resolvePublicPathname(outputDirectory, outputName) {
-  const directory = outputDirectory.split('/');
-  const index = directory.indexOf('public');
+  const directory = outputDirectory.split("/");
+  const index = directory.indexOf("public");
   const path = directory
     .map((path, i) => {
       // If actual folder is a 'public' direct subfolder and is not empty, add to pathname
@@ -387,7 +414,7 @@ function resolvePublicPathname(outputDirectory, outputName) {
         return `/${path}`;
       }
     })
-    .join('');
+    .join("");
 
   return `${path}/${outputName}`;
 }
@@ -397,8 +424,8 @@ function resolvePublicPathname(outputDirectory, outputName) {
  */
 
 function removeLastTrailingSlash(url) {
-  if (typeof url !== 'string') return url;
-  return url.replace(/\/$/, '');
+  if (typeof url !== "string") return url;
+  return url.replace(/\/$/, "");
 }
 
 /**
@@ -408,14 +435,14 @@ function removeLastTrailingSlash(url) {
 function terminalColor(text, level) {
   switch (level) {
     /** green */
-    case 'info':
+    case "info":
     default:
       return `\x1b[32m${text}\x1b[0m`;
     /** yellow */
-    case 'warn':
+    case "warn":
       return `\x1b[33m${text}\x1b[0m`;
     /** red */
-    case 'error':
+    case "error":
       return `\x1b[31m${text}\x1b[0m`;
   }
 }

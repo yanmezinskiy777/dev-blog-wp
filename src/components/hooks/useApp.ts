@@ -1,11 +1,11 @@
-import { createContext, useContext } from 'react';
-import { SiteProps } from '../../pages/_app';
+import { createContext, useContext } from "react";
+import { SiteProps } from "../../pages/_app";
 
 const initalState = {
   metadata: {
-    title: 'Dev Blog',
-    siteTitle: 'Dev Blog',
-    description: 'Dev Blog',
+    title: "Dev Blog",
+    siteTitle: "Dev Blog",
+    description: "Dev Blog",
     social: undefined,
     webmaster: {},
     twitter: {

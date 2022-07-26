@@ -1,7 +1,7 @@
-import { decodeHtmlEntities } from '../../../utils/baseUtils';
-import { getApolloClient } from '../apolloClient';
-import { QUERY_SEO_DATA, QUERY_SITE_DATA } from './query';
-import { ISettingsMetadata } from './types';
+import { decodeHtmlEntities } from "../../../utils/baseUtils";
+import { getApolloClient } from "../apolloClient";
+import { QUERY_SEO_DATA, QUERY_SITE_DATA } from "./query";
+import { ISettingsMetadata } from "./types";
 
 export async function getSiteMetadata() {
   const apolloClient = getApolloClient();
@@ -14,7 +14,9 @@ export async function getSiteMetadata() {
       query: QUERY_SITE_DATA,
     });
   } catch (e: any) {
-    console.log(`[site][getSiteMetadata] Failed to query site data: ${e.message}`);
+    console.log(
+      `[site][getSiteMetadata] Failed to query site data: ${e.message}`
+    );
     throw e;
   }
 
@@ -39,10 +41,10 @@ export async function getSiteMetadata() {
   // is a code, we need to grab the 2char version of it to use ofr
   // the HTML lang attribute
 
-  if (!language || language === '') {
-    settings.language = 'ru';
+  if (!language || language === "") {
+    settings.language = "ru";
   } else {
-    settings.language = language.split('_')[0];
+    settings.language = language.split("_")[0];
   }
 
   // If the SEO plugin is enabled, look up the data
@@ -54,8 +56,12 @@ export async function getSiteMetadata() {
         query: QUERY_SEO_DATA,
       });
     } catch (e: any) {
-      console.log(`[site][getSiteMetadata] Failed to query SEO plugin: ${e.message}`);
-      console.log('Is the SEO Plugin installed? If not, disable WORDPRESS_PLUGIN_SEO in next.config.js.');
+      console.log(
+        `[site][getSiteMetadata] Failed to query SEO plugin: ${e.message}`
+      );
+      console.log(
+        "Is the SEO Plugin installed? If not, disable WORDPRESS_PLUGIN_SEO in next.config.js."
+      );
       throw e;
     }
 
@@ -66,7 +72,7 @@ export async function getSiteMetadata() {
 
       Object.keys(social).forEach((key) => {
         const { url } = social[key];
-        if (!url || key === '__typename') return;
+        if (!url || key === "__typename") return;
         settings.social[key] = url;
       });
     }
@@ -75,7 +81,7 @@ export async function getSiteMetadata() {
       settings.webmaster = {};
 
       Object.keys(webmaster).forEach((key) => {
-        if (!webmaster[key] || key === '__typename') return;
+        if (!webmaster[key] || key === "__typename") return;
         settings.webmaster[key] = webmaster[key];
       });
     }

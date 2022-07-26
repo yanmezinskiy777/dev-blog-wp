@@ -28,7 +28,7 @@ export interface ISettings {
   };
 }
 
-export interface IOptionsConstruct{
+export interface IOptionsConstruct {
   router: NextRouter;
   homepage: string;
 }

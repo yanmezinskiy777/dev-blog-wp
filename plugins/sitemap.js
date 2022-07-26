@@ -1,15 +1,19 @@
-const path = require('path');
-const { getSitemapData, generateSitemap, generateRobotsTxt } = require('./util');
+const path = require("path");
+const {
+  getSitemapData,
+  generateSitemap,
+  generateRobotsTxt,
+} = require("./util");
 
-const WebpackPluginCompiler = require('./plugin-compiler');
+const WebpackPluginCompiler = require("./plugin-compiler");
 
 module.exports = function sitemap(nextConfig = {}) {
   const { env, outputDirectory, outputName, verbose = false } = nextConfig;
 
   const plugin = {
-    name: 'Sitemap',
-    outputDirectory: outputDirectory || './public',
-    outputName: outputName || 'sitemap.xml',
+    name: "Sitemap",
+    outputDirectory: outputDirectory || "./public",
+    outputName: outputName || "sitemap.xml",
     getData: getSitemapData,
     generate: generateSitemap,
     postcreate: generateRobotsTxt,
@@ -20,7 +24,9 @@ module.exports = function sitemap(nextConfig = {}) {
   return Object.assign({}, nextConfig, {
     webpack(config, options) {
       if (config.watchOptions) {
-        config.watchOptions.ignored.push(path.join('**', plugin.outputDirectory, plugin.outputName));
+        config.watchOptions.ignored.push(
+          path.join("**", plugin.outputDirectory, plugin.outputName)
+        );
       }
 
       config.plugins.push(
@@ -32,7 +38,7 @@ module.exports = function sitemap(nextConfig = {}) {
         })
       );
 
-      if (typeof nextConfig.webpack === 'function') {
+      if (typeof nextConfig.webpack === "function") {
         return nextConfig.webpack(config, options);
       }
 
