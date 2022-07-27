@@ -70,6 +70,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         basePath: "/posts",
       },
     },
+    revalidate: 600,
   };
 };
 
