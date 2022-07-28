@@ -69,41 +69,61 @@
 @media (max-width: 600px) {
   .Content p {
     margin-bottom: 1.3rem;
-    font-size: 0.9rem;
+    font-size: 18px;
+    line-height: 28px;
   }
   .Content h3 {
-    font-size: 1.2rem;
+    font-size: 24px;
+    line-height: 28px;
     margin-bottom: 1.3rem;
   }
   .Content h2 {
-    font-size: 1.2rem;
+    font-size: 24px;
+    line-height: 28px;
     margin-bottom: 1.3rem;
   }
   .Content code {
-    font-size: 13px;
+    font-size: 14px;
     margin-bottom: 1.3rem;
+  }
+  .Content img {
+    max-width: calc(100% + 40px);
+    margin-left: -20px;
   }
 }
 @media (max-width: 500px) {
   .Content p {
     margin-bottom: 1rem;
-    font-size: 0.8rem;
+    font-size: 16px;
+    line-height: 26px;
   }
   .Content h3 {
-    font-size: 1.1rem;
+    font-size: 22px;
+    line-height: 26px;
     margin-bottom: 1rem;
   }
   .Content h2 {
-    font-size: 1.1rem;
+    font-size: 22px;
+    line-height: 26px;
     margin-bottom: 1rem;
   }
   .Content code {
-    font-size: 10px;
+    font-size: 12px;
     margin-bottom: 1rem;
   }
 }
-@media (max-width: 420px) {
+@media (max-width: 450px) {
+  .Content code {
+    font-size: 11px;
+  }
+}
+@media (max-width: 400px) {
   .Content code {
     font-size: 9px;
+  }
+}
+@media (max-width: 350px) {
+  .Content code {
+    font-size: 8px;
   }
 }

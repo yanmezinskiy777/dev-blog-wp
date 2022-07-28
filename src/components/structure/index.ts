@@ -6,6 +6,7 @@ import Layout from "./Layout";
 import Metadata from "./Metadata";
 import Paginataion from "./Pagination";
 import PostHeader from "./PostHeader";
+import ReadProcess from "./ReadProccess";
 import PostCard from "./PostCard";
 import RecentPosts from "./RecentPosts";
 import Section from "./Section";
@@ -22,6 +23,7 @@ export {
   Metadata,
   Paginataion,
   PostHeader,
+  ReadProcess,
   PostCard,
   RecentPosts,
   Section,

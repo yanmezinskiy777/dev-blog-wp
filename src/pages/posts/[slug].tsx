@@ -23,6 +23,7 @@ import styles from "./Posts.module.css";
 import { getAllCategories } from "../../components/api/categories/categories";
 import Container from "../../components/structure/Container";
 import Toolbar from "../../components/structure/Toolbar";
+import { ReadProcess } from "../../components/structure";
 
 interface IPostPage {
   post: IPost;
@@ -68,52 +69,59 @@ const Posts = ({ post, recentPosts, categories: allCategories }: IPostPage) => {
   const helmetStteings = helmetSettingsFromMetadata(metadata, {});
 
   return (
-    <Layout>
-      <Helmet {...(helmetStteings as any)} />
-      <Section>
-        <Container>
-          <article className={styles.postBody}>
-            <PostHeader>
-              {featuredImage?.sourceUrl && (
-                <div className={styles.imageContainer}>
-                  <img
-                    srcSet={featuredImage.srcSet}
-                    src={featuredImage.sourceUrl}
-                    alt={title}
-                    className={styles.image}
+    <>
+      <ReadProcess />
+      <Layout>
+        <Helmet {...(helmetStteings as any)} />
+        <Section className={styles.sectionPost}>
+          <Container>
+            <article className={styles.postBody}>
+              <PostHeader>
+                {featuredImage?.sourceUrl && (
+                  <div className={styles.imageContainer}>
+                    <img
+                      srcSet={featuredImage.srcSet}
+                      src={featuredImage.sourceUrl}
+                      alt={title}
+                      className={styles.image}
+                    />
+                  </div>
+                )}
+                <Metadata
+                  author={author}
+                  date={date}
+                  categories={categories}
+                  type="left"
+                />
+                {title && (
+                  <h1
+                    className={styles.title}
+                    dangerouslySetInnerHTML={{
+                      __html: title,
+                    }}
                   />
-                </div>
-              )}
-              <Metadata
-                author={author}
-                date={date}
-                categories={categories}
-                type="left"
-              />
-              {title && (
-                <h1
-                  className={styles.title}
+                )}
+              </PostHeader>
+              <Content>
+                <div
+                  className={styles.content}
                   dangerouslySetInnerHTML={{
-                    __html: title,
+                    __html: content,
                   }}
                 />
-              )}
-            </PostHeader>
-            <Content>
-              <div
-                className={styles.content}
-                dangerouslySetInnerHTML={{
-                  __html: content,
-                }}
+              </Content>
+            </article>
+            <div>
+              <Toolbar
+                recentPosts={recentPosts}
+                categories={allCategories}
+                isPost={true}
               />
-            </Content>
-          </article>
-          <div>
-            <Toolbar recentPosts={recentPosts} categories={allCategories} />
-          </div>
-        </Container>
-      </Section>
-    </Layout>
+            </div>
+          </Container>
+        </Section>
+      </Layout>
+    </>
   );
 };
 

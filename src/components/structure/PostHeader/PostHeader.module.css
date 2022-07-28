@@ -4,3 +4,9 @@
   flex-direction: column;
   height: auto;
 }
+
+@media (max-width:600px) {
+  .PostHeader {
+    padding-top: 20px;
+  }
+}

@@ -26,6 +26,7 @@
   border-radius: 0.5rem;
   color: black;
 }
+
 @media (max-width: 800px) {
   .title {
     font-size: 1.5rem;
@@ -33,5 +34,22 @@
   }
   .postBody {
     padding: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .sectionPost {
+    display: block;
+    width: calc(100% + 40px);
+    margin-left: -20px !important;
+  }
+  .postBody {
+    padding: 0rem;
+    border-radius: 0rem;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
