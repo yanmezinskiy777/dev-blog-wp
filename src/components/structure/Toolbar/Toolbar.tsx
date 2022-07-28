@@ -8,7 +8,7 @@ import styles from "./Toolbar.module.css";
 interface IToolbar {
   recentPosts: IPost[];
   categories: any;
-  isPost: boolean;
+  isPost?: boolean;
 }
 
 const Toolbar: FC<IToolbar> = ({ recentPosts, categories, isPost = false }) => {
